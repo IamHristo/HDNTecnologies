@@ -45,7 +45,7 @@ jobs:
         if: always()
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp.example.com  # Replace with your SMTP server
+          server_address: smtp.office365.com  # Replace with your SMTP server
           server_port: 587  # Replace with your SMTP server port
           username: ${{ secrets.SMTP_USERNAME }}  # Set this secret in your GitHub repository
           password: ${{ secrets.SMTP_PASSWORD }}  # Set this secret in your GitHub repository
