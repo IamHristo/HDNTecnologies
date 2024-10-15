@@ -3916,7 +3916,10 @@ section p {
     color: #ffffff; /* Set text color to white */
 }
 
-#sidebar .logo img {
-    max-width: 100%;
-    height: auto;
+.logo img {
+	height: auto; /* Maintain aspect ratio */
+}
+
+.logo{
+	width: fit-content;
 }
