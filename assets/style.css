@@ -29,6 +29,7 @@
 .section-one {
   background-color: #457b9d;
   color: #f8f9fa;
+  padding-left: 40px;
 }
 
 .section-one > .col-md-8:nth-child(4) {
