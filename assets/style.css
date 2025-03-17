@@ -127,3 +127,7 @@
   height: 100% !important;
   object-fit: cover;
 }
+
+.navbar-brand img {
+  margin-right: 8px;
+}
