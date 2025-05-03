@@ -139,11 +139,7 @@
 
 a {
   text-decoration: none;
-  color: #92bfb1;
-}
-a:hover {
-  background: #92bfb1;
-  color: #333333;
+  color: #ffffff;
 }
 
 .sticky {
@@ -165,7 +161,6 @@ a:hover {
   font-size: 1em;
 }
 .navbar--icon:hover {
-  color: #92bfb1;
   cursor: pointer;
 }
 
@@ -184,7 +179,6 @@ a:hover {
 .nav--open {
   height: 100vh;
   width: 200px;
-  background: #ffffff;
   transition: all 0.4s ease-out;
   opacity: 1;
   box-shadow: 2px 2px 15px rgba(51, 51, 51, 0.1);
@@ -196,21 +190,9 @@ a:hover {
 }
 .nav--open-icon i {
   font-size: 1.8em;
-  color: #92bfb1;
-}
-.nav--open-icon i:hover {
-  color: #333333;
   cursor: pointer;
 }
 
-.nav--open-title {
-  font-family: "Playfair Display", serif;
-  font-size: 0.8em;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  text-align: center;
-  margin-top: 35%;
-}
 
 .nav--open-menu {
   height: 100%;
@@ -220,9 +202,7 @@ a:hover {
   margin-top: 30px;
 }
 .nav--open-menu a {
-  font-size: 2em;
-  font-weight: 100;
-  font-family: "Playfair Display", serif;
+  font-size: 1.5em;
   padding: 15px 0;
 }
 
@@ -230,4 +210,22 @@ a:hover {
   transform: translateX(-300px);
   transition: all 0.4s ease-out;
   opacity: 0;
+}
+
+/* Footer */
+
+#footer {
+  background-color: #1d3557;
+  margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+
+#footer > .inner .menu {
+  font-size: 1em;
+  color: rgba(255, 255, 255, 0.15);
 }
