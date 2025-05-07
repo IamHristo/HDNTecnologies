@@ -3,9 +3,13 @@
   background-image: url("../images/intro.svg");
   background-position: top right;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
 .background-image {
   background-color: #1d3557;
@@ -52,7 +56,6 @@
   background-color: #1d3557;
   color: #f8f9fa;
 }
-
 
 /* Icon */
 .icon {

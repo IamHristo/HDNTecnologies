@@ -1,0 +1,6 @@
+User-agent: *
+
+Disallow: /.vscode/
+Disallow: /.assets/
+
+Sitemap: https://hdntechnologies.com/sitemap.xml
