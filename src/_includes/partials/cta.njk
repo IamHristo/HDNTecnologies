@@ -1,0 +1,11 @@
+{# Closing call to action. Set `ctaRef` (mailto source tag, a-z 0-9 -) before including. #}
+{% set cta = "common.cta" | t(locale.code) %}
+<section class="section cta-band" aria-labelledby="cta-title-{{ ctaRef }}">
+  <div class="container cta-band__inner">
+    <div>
+      <h2 id="cta-title-{{ ctaRef }}" class="cta-band__title">{{ cta.title }}</h2>
+      <p class="cta-band__body">{{ cta.body }}</p>
+    </div>
+    <p><a class="btn btn--primary" href="{{ ctaRef | mailto(locale.code) }}">{{ cta.button }}</a></p>
+  </div>
+</section>

@@ -1,0 +1,41 @@
+<!doctype html>
+<!--
+  Source for the raster brand assets in src/assets/img/ (not published).
+  To regenerate: open this file in a browser at 100% zoom and take element screenshots of
+  #og (1200x630 -> og.png), #logo (512x512 -> logo-512.png) and #touch (180x180 -> apple-touch-icon.png).
+  The OG image is deliberately language-neutral (logo, brand, domain) so one image serves every locale.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HDN brand assets</title>
+<style>
+  body { margin: 0; padding: 20px; background: #888; display: grid; gap: 20px; justify-items: start; font-family: "Segoe UI", system-ui, sans-serif; }
+  .tile { position: relative; overflow: hidden; background: #1d3557 url("../src/assets/img/hero-lines.svg") center / cover no-repeat; }
+  #og { width: 1200px; height: 630px; display: grid; align-content: center; padding: 0 96px; box-sizing: border-box; color: #fff; }
+  #og .row { display: flex; align-items: center; gap: 40px; }
+  #og .mark { width: 168px; height: 168px; }
+  #og .brand { font-size: 84px; font-weight: 700; letter-spacing: -0.01em; line-height: 1; }
+  #og .domain { margin-top: 22px; font-size: 38px; color: #c9d6e6; }
+  #og .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 14px; background: #00bcd4; }
+  #logo { width: 512px; height: 512px; display: grid; place-items: center; }
+  #logo .mark { width: 340px; height: 340px; }
+  #touch { width: 180px; height: 180px; display: grid; place-items: center; }
+  #touch .mark { width: 120px; height: 120px; }
+</style>
+</head>
+<body>
+  <div id="og" class="tile">
+    <div class="row">
+      <img class="mark" src="../src/assets/img/favicon.svg" alt="">
+      <div>
+        <div class="brand">HDN Technologies</div>
+        <div class="domain">hdntechnologies.com</div>
+      </div>
+    </div>
+    <div class="bar"></div>
+  </div>
+  <div id="logo" class="tile"><img class="mark" src="../src/assets/img/favicon.svg" alt=""></div>
+  <div id="touch" class="tile"><img class="mark" src="../src/assets/img/favicon.svg" alt=""></div>
+</body>
+</html>

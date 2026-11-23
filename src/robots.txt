@@ -1,0 +1,29 @@
+# HDN Technologies – crawler policy
+# Search engines and AI *search/retrieval* agents are allowed.
+# AI *model-training* crawlers are not. (robots.txt is voluntary; well-behaved crawlers honour it.)
+# Note: Google Search and AI Overviews use Googlebot, so blocking Google-Extended does not affect them.
+
+User-agent: *
+Allow: /
+
+# AI search and user-initiated retrieval
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+
+# AI model-training crawlers
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: meta-externalagent
+User-agent: Bytespider
+User-agent: cohere-training-data-crawler
+Disallow: /
+
+Sitemap: https://hdntechnologies.com/sitemap.xml

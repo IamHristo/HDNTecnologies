@@ -1,0 +1,18 @@
+[
+  {
+    "code": "en",
+    "hreflang": "en",
+    "ogLocale": "en_GB",
+    "endonym": "English",
+    "prefix": "",
+    "isDefault": true
+  },
+  {
+    "code": "bg",
+    "hreflang": "bg",
+    "ogLocale": "bg_BG",
+    "endonym": "Български",
+    "prefix": "/bg",
+    "isDefault": false
+  }
+]

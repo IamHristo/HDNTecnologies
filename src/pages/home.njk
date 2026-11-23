@@ -1,0 +1,180 @@
+---
+layout: layouts/base.njk
+pageKey: home
+indexable: true
+pagination:
+  data: locales
+  size: 1
+  alias: locale
+permalink: "{{ locale.prefix }}/index.html"
+---
+{% set h = "home" | t(locale.code) %}
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero__grid">
+  <div class="hero__inner">
+    <p class="hero__eyebrow">{{ h.hero.eyebrow }}</p>
+    <h1 id="hero-title" class="hero__title">{{ h.hero.title }}</h1>
+    <p class="hero__lead">{{ h.hero.lead }}</p>
+    <div class="cluster">
+      <a class="btn btn--primary" href="{{ 'hero' | mailto(locale.code) }}">{{ h.hero.ctaPrimary }}</a>
+      <a class="btn btn--ghost" href="#services">{{ h.hero.ctaSecondary }}</a>
+    </div>
+    <ul class="facts" aria-label="{{ h.facts.label }}">
+      {% for fact in h.facts.items %}
+      <li>{{ fact }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% include "diagrams/hero.svg.njk" %}
+  </div>
+</section>
+
+<section id="why" class="section" aria-labelledby="why-title">
+  <div class="container">
+    <h2 id="why-title" class="section__title">{{ h.why.title }}</h2>
+    <p class="section__intro">{{ h.why.intro }}</p>
+    <ol class="feature-grid">
+      {% for item in h.why.items %}
+      <li class="feature">
+        <h3 class="feature__title">{{ item.title }}</h3>
+        <p>{{ item.body }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+    <p class="section__more"><a href="{{ 'whyUs' | localeUrl(locale.code) }}">{{ h.why.more }}</a></p>
+  </div>
+</section>
+
+<section id="when" class="section section--alt" aria-labelledby="when-title">
+  <div class="container">
+    <h2 id="when-title" class="section__title">{{ h.triggers.title }}</h2>
+    <p class="section__intro">{{ h.triggers.intro }}</p>
+    <ul class="trigger-grid">
+      {% for item in h.triggers.items %}
+      <li class="trigger">
+        <h3 class="trigger__title">{{ item.title }}</h3>
+        <p>{{ item.body }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="section__more"><a class="btn btn--primary" href="{{ 'triggers' | mailto(locale.code) }}">{{ h.triggers.cta }}</a></p>
+  </div>
+</section>
+
+<section id="services" class="section" aria-labelledby="services-title">
+  <div class="container">
+    <h2 id="services-title" class="section__title">{{ h.services.title }}</h2>
+    <p class="section__intro">{{ h.services.intro }}</p>
+    <ul class="card-grid">
+      {% for service in h.services.items %}
+      <li class="card" id="service-{{ service.id }}">
+        {% include "diagrams/" + service.id + ".svg.njk" %}
+        <h3 class="card__title">{{ service.title }}</h3>
+        <p class="card__for">{{ service.forWhom }}</p>
+        <p>{{ service.body }}</p>
+        <p class="card__link"><a href="{{ 'services' | localeUrl(locale.code) }}#service-{{ service.id }}">{{ h.services.more }}<span class="visually-hidden">: {{ service.title }}</span></a></p>
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="section__more"><a href="{{ 'services' | localeUrl(locale.code) }}">{{ h.services.all }}</a></p>
+  </div>
+</section>
+
+{% set c = h.work.case %}
+<section id="work" class="section section--alt" aria-labelledby="work-title">
+  <div class="container">
+    <h2 id="work-title" class="section__title">{{ h.work.title }}</h2>
+    <p class="section__intro">{{ h.work.intro }}</p>
+    <article class="case" aria-labelledby="case-title">
+      <header class="case__header">
+        <h3 id="case-title" class="case__title">{{ c.title }}</h3>
+        <p class="case__meta">{{ c.meta }}</p>
+        <p class="case__nda">
+          <svg class="icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path class="ic" d="M6 11h12v10H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3"/></svg>
+          {{ c.nda }}
+        </p>
+      </header>
+      <div class="case__body">
+        <p class="case__summary">{{ c.summary }}</p>
+        {% include "diagrams/architecture.njk" %}
+        <p><a class="btn btn--ghost" href="{{ 'caseTeleservice' | localeUrl(locale.code) }}">{{ c.link }}</a></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="engage" class="section" aria-labelledby="engage-title">
+  <div class="container">
+    <h2 id="engage-title" class="section__title">{{ h.engage.title }}</h2>
+    <p class="section__intro">{{ h.engage.intro }}</p>
+    <ul class="engage-grid">
+      {% for m in h.engage.items %}
+      <li class="engage" id="engage-{{ m.id }}">
+        <h3 class="engage__title">{{ m.title }}</h3>
+        <dl class="engage__facts">
+          <div><dt>{{ h.engage.bestForLabel }}</dt><dd>{{ m.bestFor }}</dd></div>
+          <div><dt>{{ h.engage.timelineLabel }}</dt><dd>{{ m.timeline }}</dd></div>
+        </dl>
+        <h4 class="engage__subtitle">{{ h.engage.receiveLabel }}</h4>
+        <ul class="checklist">
+          {% for r in m.receive %}
+          <li>{{ r }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="section__more">{{ h.engage.note }}</p>
+  </div>
+</section>
+
+<section id="process" class="section section--alt" aria-labelledby="process-title">
+  <div class="container">
+    <h2 id="process-title" class="section__title">{{ h.process.title }}</h2>
+    <p class="section__intro">{{ h.process.intro }}</p>
+    <ol class="steps">
+      {% for step in h.process.steps %}
+      <li class="steps__item">
+        <h3 class="steps__title">{{ step.title }}</h3>
+        <p>{{ step.body }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section id="faq" class="section" aria-labelledby="faq-title">
+  <div class="container">
+    <h2 id="faq-title" class="section__title">{{ h.faq.title }}</h2>
+    {# Visible text is the exact source of the FAQPage JSON-LD (see structuredData in eleventy.config.js). #}
+    <div class="faq">
+      {% for item in h.faq.items %}
+      <details class="faq__item">
+        <summary class="faq__q">{{ item.q }}</summary>
+        <p class="faq__a">{{ item.a }}</p>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section section--alt" aria-labelledby="contact-title">
+  <div class="container contact">
+    <div class="contact__main">
+      <h2 id="contact-title" class="section__title">{{ h.contact.title }}</h2>
+      <p class="section__intro">{{ h.contact.intro }}</p>
+      <p><a class="btn btn--primary" href="{{ 'contact' | mailto(locale.code) }}">{{ h.contact.cta }}</a></p>
+      <p class="contact__email">{{ h.contact.emailLabel }}: <a href="{{ 'contact-email' | mailto(locale.code) }}">{{ site.email }}</a></p>
+      <p class="contact__note">{{ h.contact.privacyNote }} <a href="{{ 'privacy' | localeUrl(locale.code) }}">{{ h.contact.privacyLink }}</a>.</p>
+    </div>
+    <div class="contact__aside">
+      <h3>{{ h.contact.includeTitle }}</h3>
+      <ul class="checklist">
+        {% for item in h.contact.include %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>

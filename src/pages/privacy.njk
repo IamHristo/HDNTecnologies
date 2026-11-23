@@ -1,0 +1,31 @@
+---
+layout: layouts/base.njk
+pageKey: privacy
+indexable: true
+pagination:
+  data: locales
+  size: 1
+  alias: locale
+permalink: "{{ locale.prefix }}/privacy/index.html"
+---
+{# TODO(owner): have this notice reviewed. Confirm retention periods and name your email provider
+   as a recipient of enquiry emails once known. #}
+{% set p = "privacy" | t(locale.code) %}
+<article class="section">
+  <div class="container prose">
+    <h1>{{ p.heading }}</h1>
+    <p class="meta">{{ p.updatedLabel }}: <time datetime="{{ p.updated }}">{{ p.updated }}</time></p>
+    {% for s in p.sections %}
+    <section aria-labelledby="privacy-s{{ loop.index }}">
+      <h2 id="privacy-s{{ loop.index }}">{{ s.title }}</h2>
+      {% for para in s.paragraphs %}
+      <p>{{ para }}</p>
+      {% endfor %}
+      {% if s.link %}
+      <p><a href="{{ s.link.href }}" rel="external noopener noreferrer">{{ s.link.text }}</a></p>
+      {% endif %}
+    </section>
+    {% endfor %}
+    <p><a href="{{ 'home' | localeUrl(locale.code) }}">{{ p.backHome }}</a></p>
+  </div>
+</article>

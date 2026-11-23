@@ -1,0 +1,67 @@
+---
+permalink: /llms.txt
+eleventyExcludeFromCollections: true
+---
+{#- Plain text (not HTML): values are output with `safe` so "&" is not turned into "&amp;". -#}
+{%- set en = "home" | t("en") -%}
+# {{ site.brand | safe }}
+
+> {{ en.description | safe }}
+
+{{ site.brand | safe }} is the trading name of {{ site.legalName | safe }} ({{ site.legalNameLatin | safe }}), a company registered in the Bulgarian Commercial Register.
+
+- Legal name: {{ site.legalName | safe }} ({{ site.legalNameLatin | safe }})
+- UIC (ЕИК): {{ site.eik }}
+- VAT: {{ site.vatId }}
+- Founded: {{ site.foundingDate }}
+- Location: {{ site.locality }}, Bulgaria
+- Serves: Bulgaria and the European Union
+- Working languages: English, Bulgarian
+- Email: {{ site.email }}
+- LinkedIn: {{ site.linkedin }}
+- Core stack: C#/.NET, SignalR/WebSockets, relational and time-series databases, CI/CD
+- Bulgarian version: {{ site.url }}/bg/
+
+## Pages
+
+{% set pageNotes = {
+  home: "overview, differentiators, when to reach out, engagement models, FAQ and contact",
+  whyUs: "engineering standards, comparison with body-shops and freelancers, good fit / not a fit",
+  services: "real-time systems, backend engineering and APIs, business system integrations",
+  caseTeleservice: "NDA-safe case study of a real-time teleservice communication platform",
+  privacy: "data controller details and GDPR information"
+} %}
+{% for pageKey, path in pages %}
+{% for alt in pageKey | alternates %}
+- [{{ (pageKey + (".heading" if pageKey != "home" else ".title")) | t(alt.code) | safe }}]({{ site.url }}{{ alt.url }}) ({{ alt.endonym }}): {{ pageNotes[pageKey] }}
+{% endfor %}
+{% endfor %}
+
+## Why work with us
+
+{% for w in en.why.items %}
+- {{ w.title | safe }}: {{ w.body | safe }}
+{% endfor %}
+
+## Services
+
+{% for s in "services.items" | t("en") %}
+- {{ s.title | safe }}: {{ s.summary | safe }} Duration: {{ s.duration | safe }}
+{% endfor %}
+
+## Engagement models
+
+{% for m in en.engage.items %}
+- {{ m.title | safe }} ({{ m.timeline | safe }}): {{ m.bestFor | safe }} You receive: {{ m.receive | join("; ") | safe }}.
+{% endfor %}
+
+## Selected work
+
+{% set cs = "caseTeleservice" | t("en") %}
+- {{ cs.heading | safe }} ({{ en.work.case.meta | safe }}). {{ cs.overview | safe }} Scope: {{ cs.scope | join("; ") | safe }}. {{ en.work.case.nda | safe }}
+
+## FAQ
+
+{% for item in en.faq.items %}
+- {{ item.q | safe }} {{ item.a | safe }}
+{% endfor %}

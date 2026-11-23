@@ -1,0 +1,30 @@
+{
+  "name": "hdntechnologies-website",
+  "private": true,
+  "description": "Static multilingual website for HDN Technologies, built with Eleventy and deployed to GitHub Pages.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve --port=8080",
+    "clean": "node -e \"require('fs').rmSync('_site',{recursive:true,force:true})\"",
+    "verify": "node scripts/verify-dist.mjs _site",
+    "validate:html": "html-validate \"_site/**/*.html\"",
+    "test:a11y": "node scripts/a11y.mjs _site",
+    "test:lighthouse": "lhci autorun",
+    "check": "npm run build && npm run verify && npm run validate:html",
+    "test": "npm run check && npm run test:a11y && npm run test:lighthouse"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.7",
+    "@axe-core/playwright": "4.14.0",
+    "@lhci/cli": "0.16.0",
+    "html-validate": "11.21.0",
+    "playwright": "1.65.0"
+  },
+  "overrides": {
+    "basic-ftp": "6.2.6"
+  }
+}

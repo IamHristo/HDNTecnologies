@@ -1,0 +1,65 @@
+---
+layout: layouts/base.njk
+pageKey: services
+indexable: true
+pagination:
+  data: locales
+  size: 1
+  alias: locale
+permalink: "{{ locale.prefix }}/services/index.html"
+---
+{% set p = "services" | t(locale.code) %}
+{% set ph = p %}
+{% include "partials/page-head.njk" %}
+
+<div class="section">
+  <div class="container">
+    <nav class="toc" aria-labelledby="toc-title">
+      <h2 id="toc-title" class="toc__title">{{ p.tocLabel }}</h2>
+      <ol>
+        {% for s in p.items %}
+        <li><a href="#service-{{ s.id }}">{{ s.title }}</a></li>
+        {% endfor %}
+      </ol>
+    </nav>
+
+    {% for s in p.items %}
+    <article id="service-{{ s.id }}" class="service" aria-labelledby="service-{{ s.id }}-title">
+      <header class="service__header">
+        {% include "diagrams/" + s.id + ".svg.njk" %}
+        <div>
+          <h2 id="service-{{ s.id }}-title" class="service__title">{{ s.title }}</h2>
+          <p class="service__summary">{{ s.summary }}</p>
+        </div>
+      </header>
+      <div class="service__grid">
+        <div>
+          <h3 id="service-{{ s.id }}-problems" class="service__subtitle">{{ p.labels.problems }}</h3>
+          <ul class="bullets">
+            {% for x in s.problems %}<li>{{ x }}</li>{% endfor %}
+          </ul>
+        </div>
+        <div>
+          <h3 id="service-{{ s.id }}-deliverables" class="service__subtitle">{{ p.labels.deliverables }}</h3>
+          <ul class="checklist">
+            {% for x in s.deliverables %}<li>{{ x }}</li>{% endfor %}
+          </ul>
+        </div>
+        <div>
+          <h3 id="service-{{ s.id }}-practices" class="service__subtitle">{{ p.labels.practices }}</h3>
+          <ul class="bullets">
+            {% for x in s.practices %}<li>{{ x }}</li>{% endfor %}
+          </ul>
+        </div>
+      </div>
+      <p class="service__duration"><strong>{{ p.labels.duration }}:</strong> {{ s.duration }}</p>
+      {% if s.id == "realtime" %}<p class="service__case"><a href="{{ 'caseTeleservice' | localeUrl(locale.code) }}">{{ p.caseLink }}</a></p>{% endif %}
+    </article>
+    {% endfor %}
+
+    <p class="section__more"><a href="{{ 'home' | localeUrl(locale.code) }}#engage">{{ p.engageLink }}</a></p>
+  </div>
+</div>
+
+{% set ctaRef = "services" %}
+{% include "partials/cta.njk" %}

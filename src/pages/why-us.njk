@@ -1,0 +1,91 @@
+---
+layout: layouts/base.njk
+pageKey: whyUs
+indexable: true
+pagination:
+  data: locales
+  size: 1
+  alias: locale
+permalink: "{{ locale.prefix }}/why-us/index.html"
+---
+{% set p = "whyUs" | t(locale.code) %}
+{% set ph = p %}
+{% include "partials/page-head.njk" %}
+
+<section id="standards" class="section" aria-labelledby="standards-title">
+  <div class="container">
+    <h2 id="standards-title" class="section__title">{{ p.standards.title }}</h2>
+    <p class="section__intro">{{ p.standards.intro }}</p>
+    <ul class="feature-grid feature-grid--3">
+      {% for item in p.standards.items %}
+      <li class="feature">
+        <h3 class="feature__title">{{ item.title }}</h3>
+        <p>{{ item.body }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    <aside class="callout" aria-labelledby="example-title">
+      <h3 id="example-title" class="callout__title">{{ p.example.title }}</h3>
+      <p>{{ p.example.body }}</p>
+    </aside>
+  </div>
+</section>
+
+<section id="compare" class="section section--alt" aria-labelledby="compare-title">
+  <div class="container">
+    <h2 id="compare-title" class="section__title">{{ p.compare.title }}</h2>
+    <p class="section__intro">{{ p.compare.intro }}</p>
+    {# Scrolls horizontally on narrow screens; focusable so keyboard users can scroll it too. #}
+    <section class="table-wrap" aria-labelledby="compare-caption" tabindex="0">
+      <table class="compare">
+        <caption id="compare-caption">{{ p.compare.caption }}</caption>
+        <thead>
+          <tr>
+            <th scope="col"><span class="visually-hidden">{{ p.compare.criterion }}</span></th>
+            {% for col in p.compare.columns %}
+            <th scope="col"{% if loop.first %} class="compare__us"{% endif %}>{{ col }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in p.compare.rows %}
+          <tr>
+            <th scope="row">{{ row.label }}</th>
+            {% for v in row.values %}
+            <td{% if loop.first %} class="compare__us"{% endif %}>{{ v }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </div>
+</section>
+
+<section id="fit" class="section" aria-labelledby="fit-title">
+  <div class="container">
+    <h2 id="fit-title" class="section__title">{{ p.fit.title }}</h2>
+    <p class="section__intro">{{ p.fit.intro }}</p>
+    <div class="fit">
+      <div class="fit__col fit__col--good">
+        <h3>{{ p.fit.goodTitle }}</h3>
+        <ul class="checklist">
+          {% for item in p.fit.good %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="fit__col fit__col--not">
+        <h3>{{ p.fit.notTitle }}</h3>
+        <ul class="crosslist">
+          {% for item in p.fit.not %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% set ctaRef = "why-us" %}
+{% include "partials/cta.njk" %}
