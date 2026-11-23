@@ -2,9 +2,10 @@
 <html lang="{{ locale.hreflang }}">
 <head>
   <meta charset="utf-8">
-  {# Meta CSP: no scripts at all, same-origin styles/images only. frame-ancestors, report-uri and
-     sandbox are ignored in <meta> by design; GitHub Pages cannot send custom headers. #}
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+  {# Meta CSP: no scripts at all, same-origin styles/images only. connect-src 'self' lets tools such as
+     Lighthouse fetch /robots.txt and /llms.txt from the page; with no script allowed it has no other effect.
+     frame-ancestors, report-uri and sandbox are ignored in <meta> by design; GitHub Pages cannot send headers. #}
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="color-scheme" content="light dark">

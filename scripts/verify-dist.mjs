@@ -30,7 +30,7 @@ for (const f of files) {
 }
 
 // 2. Required public files.
-for (const req of ["index.html", "404.html", "robots.txt", "sitemap.xml", "CNAME"]) {
+for (const req of ["index.html", "404.html", "robots.txt", "sitemap.xml", "llms.txt", "CNAME"]) {
   if (!fs.existsSync(path.join(DIST, req))) errors.push(`${req}: required file is missing`);
 }
 
@@ -105,6 +105,84 @@ for (const f of files.filter((x) => x.endsWith(".css"))) {
     const url = m[1] ?? m[2];
     if (isExternal(url)) fail(f, `third-party CSS resource: ${url}`);
   }
+}
+
+// Helpers for page-level checks below.
+const htmlFiles = files.filter((x) => x.endsWith(".html"));
+const pageFor = (urlPath) => {
+  const clean = urlPath.replace(SITE_ORIGIN, "").split(/[?#]/)[0] || "/";
+  return path.join(DIST, clean, clean.endsWith("/") ? "index.html" : "");
+};
+const urlFor = (file) => {
+  const r = rel(file);
+  if (r === "404.html") return null;
+  return `${SITE_ORIGIN}/${r.replace(/index\.html$/, "")}`;
+};
+const idsCache = new Map();
+const idsOf = (file) => {
+  if (!idsCache.has(file)) {
+    const html = fs.readFileSync(file, "utf8");
+    idsCache.set(file, new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1])));
+  }
+  return idsCache.get(file);
+};
+
+// 6. Internal links (and their #fragments) must resolve.
+for (const f of htmlFiles) {
+  const html = fs.readFileSync(f, "utf8");
+  for (const m of html.matchAll(/<a\b[^>]*\shref="([^"]+)"/gi)) {
+    const href = m[1];
+    if (/^(mailto:|tel:)/.test(href) || isExternal(href)) continue;
+    const [p, frag] = href.split("#");
+    const target = p ? pageFor(p) : f;
+    if (!fs.existsSync(target)) { fail(f, `broken internal link: ${href}`); continue; }
+    if (frag && !idsOf(target).has(frag)) fail(f, `link target #${frag} not found: ${href}`);
+  }
+  // aria-labelledby / aria-describedby / label[for] must point at existing ids on the same page.
+  for (const m of html.matchAll(/\s(?:aria-labelledby|aria-describedby|aria-controls|for)="([^"]+)"/g)) {
+    for (const id of m[1].split(/\s+/)) {
+      if (!idsOf(f).has(id)) fail(f, `reference to missing id "${id}"`);
+    }
+  }
+  // Duplicate ids.
+  const all = [...html.matchAll(/\sid="([^"]+)"/g)].map((x) => x[1]);
+  const dupes = all.filter((id, i) => all.indexOf(id) !== i);
+  if (dupes.length) fail(f, `duplicate id(s): ${[...new Set(dupes)].join(", ")}`);
+}
+
+// 7. hreflang clusters must be reciprocal and self-referencing; canonical must point to itself.
+const hreflangOf = (file) =>
+  [...fs.readFileSync(file, "utf8").matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)">/g)]
+    .map((m) => ({ lang: m[1], href: m[2] }));
+for (const f of htmlFiles) {
+  const self = urlFor(f);
+  if (!self) continue;
+  const html = fs.readFileSync(f, "utf8");
+  const canonical = (html.match(/<link rel="canonical" href="([^"]+)">/) ?? [])[1];
+  if (canonical && canonical !== self) fail(f, `canonical ${canonical} does not match page URL ${self}`);
+  const alts = hreflangOf(f);
+  if (!alts.length) continue;
+  if (!alts.some((a) => a.href === self && a.lang !== "x-default")) fail(f, "hreflang set does not include the page itself");
+  if (!alts.some((a) => a.lang === "x-default")) fail(f, "hreflang set has no x-default");
+  for (const a of alts) {
+    const target = pageFor(a.href);
+    if (!fs.existsSync(target)) { fail(f, `hreflang target missing: ${a.href}`); continue; }
+    if (!hreflangOf(target).some((b) => b.href === self)) fail(f, `hreflang not reciprocal: ${a.href} does not link back`);
+  }
+}
+
+// 8. security.txt (RFC 9116): required fields and an Expires date in the future, at most a year ahead.
+const securityTxt = path.join(DIST, ".well-known", "security.txt");
+if (!fs.existsSync(securityTxt)) {
+  errors.push(".well-known/security.txt: required file is missing");
+} else {
+  const txt = fs.readFileSync(securityTxt, "utf8");
+  if (!/^Contact: (mailto:|https:)/m.test(txt)) fail(securityTxt, "missing Contact field");
+  const expires = Date.parse((txt.match(/^Expires: (.+)$/m) ?? [])[1] ?? "");
+  const now = Date.now();
+  if (Number.isNaN(expires)) fail(securityTxt, "missing or invalid Expires field");
+  else if (expires <= now) fail(securityTxt, "Expires date is in the past – renew it");
+  else if (expires - now > 366 * 24 * 3600 * 1000) fail(securityTxt, "Expires date is more than a year ahead (RFC 9116 recommends < 1 year)");
 }
 
 // 5. Sitemap URLs must exist in the build.

@@ -213,6 +213,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ [`${SRC}/assets`]: "assets" });
   eleventyConfig.addPassthroughCopy({ [`${SRC}/CNAME`]: "CNAME" });
   eleventyConfig.addPassthroughCopy({ [`${SRC}/robots.txt`]: "robots.txt" });
+  eleventyConfig.addPassthroughCopy({ [`${SRC}/.well-known/security.txt`]: ".well-known/security.txt" });
   return {
     dir: {
       input: SRC,

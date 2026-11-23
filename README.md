@@ -9,12 +9,26 @@ Visitors receive **zero JavaScript** and **zero third-party requests** (no CDNs,
 ## Quick start
 
 ```sh
-npm ci          # install the pinned build tool (install scripts are disabled via .npmrc)
-npm run serve   # local dev server on http://localhost:8080 with live reload
-npm run check   # production build into _site/ + output verification
+npm ci                          # install pinned tools (install scripts are disabled via .npmrc)
+npm run serve                   # local dev server on http://localhost:8080 with live reload
+npm run check                   # build into _site/ + output verification + HTML validation
+npx playwright install chromium # once, for the browser tests
+npm test                        # check + accessibility tests + Lighthouse budgets
 ```
 
-Requires Node.js 20 or newer.
+Requires Node.js 20 or newer. On Windows, point Lighthouse at Playwright's Chromium if Chrome is not installed:
+`CHROME_PATH="$(node -e "console.log(require('playwright').chromium.executablePath())")" npm run test:lighthouse`.
+
+## Quality gates
+
+| Command | What it enforces |
+|---|---|
+| `npm run verify` | no internal files published; no scripts, inline styles/handlers or third-party resources; strict CSP on every page; safe external links; valid JSON-LD; every referenced asset, internal link and `#anchor` exists; no duplicate ids; reciprocal hreflang + self-canonical; `security.txt` present and not expiring |
+| `npm run validate:html` | `html-validate` recommended + a11y rule sets (incl. title length) |
+| `npm run test:a11y` | axe-core WCAG 2.0/2.1/2.2 A+AA and best practices on every page, desktop + mobile, light + dark, with all `<details>` opened; keyboard walk (skip link first, every stop visible with a focus ring); reflow at 320 px; reduced motion; no console/CSP errors; no third-party requests |
+| `npm run test:lighthouse` | Lighthouse CI budgets (`lighthouserc.json`): Performance ≥ 95, Accessibility/Best practices/SEO = 100, LCP ≤ 2 s, CLS ≤ 0.01, TBT ≤ 50 ms, ≤ 150 KB per page |
+
+All gates run in CI before anything is deployed.
 
 ## Project structure
 
@@ -60,23 +74,28 @@ English silently. hreflang tags, sitemap alternates, the 404 page and the langua
 ## Deployment
 
 `.github/workflows/static.yml` runs on every push and pull request to `main`:
-`npm ci --ignore-scripts` → `npm run build` → `npm run verify` → upload `_site/` → deploy (on `main` only).
-Actions are pinned to commit SHAs.
-
-`npm run verify` fails the build if the output contains internal files (README, `.vscode`, sources),
-executable scripts, inline handlers or styles, third-party resources, unsafe external links, invalid JSON-LD,
-or sitemap URLs without a page.
+`npm ci --ignore-scripts` → build → verify → HTML validation → accessibility tests → Lighthouse budgets →
+upload `_site/` → deploy (pushes to `main` and manual runs only; pull requests are tested, never deployed).
+Actions are pinned to commit SHAs; npm dependencies are pinned exactly with a lockfile.
 
 ## Security model (GitHub Pages free tier)
 
-GitHub Pages cannot send custom HTTP headers, so the baseline is:
+GitHub Pages sends **no** security headers for this site (checked 2026-11-23: no HSTS, CSP, `nosniff`,
+`X-Frame-Options`, `Referrer-Policy` or `Permissions-Policy`) and cannot be configured to. The baseline is therefore:
 
-- every page carries a strict meta CSP: `default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests`
-  (`frame-ancestors`, `report-uri` and `sandbox` are ignored in `<meta>` by browsers – accepted, the site has no
-  logins or state-changing actions);
+- every page carries a strict meta CSP:
+  `default-src 'none'; style-src 'self'; img-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests`
+  – no script can run at all. `connect-src 'self'` only lets tools such as Lighthouse fetch `/robots.txt` and `/llms.txt`.
+  `frame-ancestors`, `report-uri` and `sandbox` are ignored in `<meta>` by browsers; clickjacking protection is therefore
+  not available on this tier – accepted, since the site has no logins, forms or state-changing actions;
 - `<meta name="referrer" content="strict-origin-when-cross-origin">`;
 - no JavaScript, no third-party resources, external links use `rel="external noopener noreferrer"`;
-- GitHub repository settings: **Enforce HTTPS** on, and the custom domain **verified** (Settings -> Pages) to prevent takeover.
+- `/.well-known/security.txt` (RFC 9116). **Renew `Expires` before 2027-11-23** – the build fails once it has passed;
+- GitHub repository settings: **Enforce HTTPS** is on; the custom domain still needs to be **verified**
+  (account or organisation Settings → Pages → Verified domains) to prevent domain takeover.
+
+If real HTTP headers (HSTS preload, `frame-ancestors`, `Permissions-Policy`) ever become a requirement, the site can
+move unchanged to a host that supports a `_headers` file (e.g. Cloudflare Pages or Netlify), since `_site/` is plain static output.
 
 ## Owner TODO
 
@@ -84,5 +103,6 @@ GitHub Pages cannot send custom HTTP headers, so the baseline is:
       name the email provider as a recipient.
 - [ ] Native-speaker review of the Bulgarian copy (`src/_data/i18n/bg.json`), especially the privacy notice.
 - [ ] Confirm the NDA wording of the automotive case study (`home.work` in both translation files).
-- [ ] `/.well-known/security.txt`, accessibility and Lighthouse CI checks – Phase 3.
-- [ ] Verify the custom domain and enable "Enforce HTTPS" in the repository's Pages settings.
+- [ ] Verify `hdntechnologies.com` under Settings → Pages → Verified domains (HTTPS is already enforced).
+- [ ] Manual screen-reader pass (NVDA on Windows, VoiceOver on iOS) in English and Bulgarian.
+- [ ] Renew `src/.well-known/security.txt` `Expires` before 2027-11-23.

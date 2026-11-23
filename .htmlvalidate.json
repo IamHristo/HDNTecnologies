@@ -1,0 +1,9 @@
+{
+  "$schema": "https://html-validate.org/schemas/config.json",
+  "extends": ["html-validate:recommended", "html-validate:a11y"],
+  "rules": {
+    "no-trailing-whitespace": "off",
+    "void-style": ["error", { "style": "omit" }],
+    "doctype-style": ["error", { "style": "lowercase" }]
+  }
+}

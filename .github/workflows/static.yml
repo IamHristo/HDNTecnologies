@@ -1,4 +1,4 @@
-# Build the site with Eleventy, verify the output, and deploy only _site/ to GitHub Pages.
+# Build the site with Eleventy, test the output, and deploy only _site/ to GitHub Pages.
 # Nothing outside _site/ (README, .vscode, sources, node_modules) is ever published.
 name: Build and deploy to GitHub Pages
 
@@ -38,17 +38,29 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Verify build output
+      - name: Verify build output (security baseline, links, hreflang, security.txt)
         run: npm run verify
 
+      - name: Validate HTML
+        run: npm run validate:html
+
+      - name: Install Chromium for browser tests
+        run: npx playwright install --with-deps chromium
+
+      - name: Accessibility tests (axe WCAG 2.2 AA, keyboard, reflow, reduced motion)
+        run: npm run test:a11y
+
+      - name: Lighthouse budgets
+        run: npm run test:lighthouse
+
       - name: Upload Pages artifact
-        if: github.event_name != 'pull_request'
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
           path: _site
 
   deploy:
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     permissions:
