@@ -4,11 +4,13 @@
     "navLabel": "Primary",
     "nav": {
       "services": "Services",
+      "work": "Work",
       "process": "Process",
       "contact": "Contact"
     },
     "langSwitchLabel": "Language",
-    "homeLinkLabel": "HDN Technologies – home",
+    "breadcrumbHome": "Home",
+    "ogImageAlt": "HDN Technologies logo on a dark blue background with the address hdntechnologies.com",
     "footer": {
       "legalLabel": "Company details",
       "locationLabel": "Location",
@@ -30,7 +32,7 @@
       "title": "Software engineering and system integration from Plovdiv, for businesses across the EU.",
       "lead": "HDN Technologies is a Bulgarian engineering company. We build custom software, connect business systems, and engineer real-time communication between machines and cloud services – including remote-service communication for the automotive industry.",
       "ctaPrimary": "Email us about your project",
-      "ctaSecondary": "See our services"
+      "ctaSecondary": "See our work"
     },
     "facts": {
       "label": "Key facts",
@@ -65,6 +67,41 @@
         }
       ]
     },
+    "work": {
+      "title": "Selected work",
+      "intro": "We share project details only within the limits of our confidentiality agreements.",
+      "case": {
+        "title": "Real-time teleservice communication platform",
+        "meta": "Automotive industry · Two-year engagement, completed in 2026",
+        "nda": "Client and product details are confidential under NDA.",
+        "context": "A platform that connects machines in the field with central services in real time, so they can be monitored and serviced remotely. We were responsible for the platform's core engineering, end to end.",
+        "scopeTitle": "Our scope",
+        "scope": [
+          "System design and architecture",
+          "API design and implementation",
+          "Real-time communication between machines and backend services with SignalR",
+          "System data flows",
+          "Database design",
+          "Complete CI/CD pipeline"
+        ],
+        "outcomeTitle": "Outcome",
+        "outcome": "Delivered end to end over a two-year engagement and completed in 2026."
+      },
+      "diagram": {
+        "caption": "Simplified, anonymised view of the architecture. It shows the type of system, not the client's actual topology.",
+        "machines": "Connected machines",
+        "hub": "Real-time hub",
+        "hubNote": "SignalR",
+        "api": "APIs and services",
+        "data": "Databases",
+        "pipelineLabel": "CI/CD",
+        "pipeline": [
+          "Build",
+          "Test",
+          "Deploy"
+        ]
+      }
+    },
     "process": {
       "title": "How an engagement works",
       "intro": "A clear, predictable path from first conversation to a running system.",
@@ -84,6 +121,35 @@
         {
           "title": "Handover and support",
           "body": "Documentation, deployment pipelines and knowledge transfer – plus ongoing support if you need it."
+        }
+      ]
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": [
+        {
+          "q": "Where is HDN Technologies based, and who do you work with?",
+          "a": "HDN Technologies (Ейч Ди Ен Технолоджийс ЕООД) is a software engineering company based in Plovdiv, Bulgaria. We work with businesses in Bulgaria and across the European Union."
+        },
+        {
+          "q": "What does HDN Technologies do?",
+          "a": "We provide consulting, system integration and custom software development: architecture and system design, APIs, data flows, databases, real-time communication and CI/CD pipelines – from the first design decision to a system running in production."
+        },
+        {
+          "q": "Do you have experience with real-time systems?",
+          "a": "Yes. Over a two-year engagement completed in 2026, we engineered a real-time teleservice communication platform for the automotive industry, including real-time communication between machines and backend services with SignalR. Client details are confidential under NDA."
+        },
+        {
+          "q": "Will you sign an NDA?",
+          "a": "Yes. If you need a non-disclosure agreement before sharing details about your systems or product, mention it in your first email and we will sign it before going into detail."
+        },
+        {
+          "q": "How does a project start?",
+          "a": "Send a short email to sales@hdntechnologies.com describing what you need. We follow up with an introductory call and then a written technical assessment with a proposed architecture, scope and delivery plan."
+        },
+        {
+          "q": "Which languages do you work in?",
+          "a": "We work in English and Bulgarian."
         }
       ]
     },

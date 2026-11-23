@@ -55,7 +55,115 @@ function loadI18n() {
     }
   }
 
-  return { locales, pages, strings, defaultLocale };
+  const site = readJson(path.join(DATA_DIR, "site.json"));
+  return { locales, pages, strings, defaultLocale, site };
+}
+
+/**
+ * Build the schema.org JSON-LD graph for a page in one locale. All text comes from the same
+ * translation strings that render the visible page, so structured data always matches the content.
+ */
+function structuredData(i18n, pageKey, lang) {
+  const { site, strings, locales, pages } = i18n;
+  const s = strings[lang];
+  const locale = locales.find((l) => l.code === lang);
+  const urlOf = (key) => `${site.url}${locale.prefix}${pages[key]}`;
+  const orgId = `${site.url}/#organization`;
+  const siteId = `${site.url}/#website`;
+  const pageUrl = urlOf(pageKey);
+
+  const areaServed = [
+    { "@type": "Country", name: "Bulgaria" },
+    { "@type": "AdministrativeArea", name: "European Union" },
+  ];
+
+  const organization = {
+    "@type": ["Organization", "ProfessionalService"],
+    "@id": orgId,
+    name: site.brand,
+    legalName: site.legalName,
+    alternateName: site.legalNameLatin,
+    url: `${site.url}/`,
+    logo: { "@type": "ImageObject", url: `${site.url}${site.logo}`, width: 512, height: 512 },
+    image: `${site.url}${site.ogImage}`,
+    description: s.home.description,
+    email: site.email,
+    foundingDate: site.foundingDate,
+    vatID: site.vatId,
+    identifier: { "@type": "PropertyValue", propertyID: "EIK", value: site.eik },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: site.locality,
+      postalCode: site.postalCode,
+      addressCountry: site.countryCode,
+    },
+    areaServed,
+    knowsAbout: site.knowsAbout,
+    knowsLanguage: site.workingLanguages,
+    sameAs: [site.linkedin],
+  };
+
+  const website = {
+    "@type": "WebSite",
+    "@id": siteId,
+    url: `${site.url}/`,
+    name: site.brand,
+    inLanguage: locales.map((l) => l.hreflang),
+    publisher: { "@id": orgId },
+  };
+
+  const webpage = {
+    "@type": "WebPage",
+    "@id": `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: s[pageKey].title,
+    description: s[pageKey].description,
+    inLanguage: locale.hreflang,
+    isPartOf: { "@id": siteId },
+    about: { "@id": orgId },
+  };
+
+  const graph = [organization, website, webpage];
+
+  if (pageKey === "home") {
+    for (const item of s.home.services.items) {
+      graph.push({
+        "@type": "Service",
+        "@id": `${pageUrl}#service-${item.id}`,
+        name: item.title,
+        serviceType: item.title,
+        description: `${item.forWhom} ${item.body}`,
+        provider: { "@id": orgId },
+        areaServed,
+        inLanguage: locale.hreflang,
+      });
+    }
+    graph.push({
+      "@type": "FAQPage",
+      "@id": `${pageUrl}#faq`,
+      inLanguage: locale.hreflang,
+      isPartOf: { "@id": `${pageUrl}#webpage` },
+      mainEntity: s.home.faq.items.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
+    });
+  } else {
+    const breadcrumbId = `${pageUrl}#breadcrumb`;
+    webpage.breadcrumb = { "@id": breadcrumbId };
+    graph.push({
+      "@type": "BreadcrumbList",
+      "@id": breadcrumbId,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: s.common.breadcrumbHome, item: urlOf("home") },
+        { "@type": "ListItem", position: 2, name: s[pageKey].heading, item: pageUrl },
+      ],
+    });
+  }
+
+  // Escape "<" so the JSON can never close the surrounding <script> element.
+  return JSON.stringify({ "@context": "https://schema.org", "@graph": graph }, null, 2).replace(/</g, "\\u003c");
 }
 
 export default function (eleventyConfig) {
@@ -96,13 +204,15 @@ export default function (eleventyConfig) {
     return i18n.locales.map((l) => ({ ...l, url: `${l.prefix}${i18n.pages[pageKey]}` }));
   });
 
+  /** schema.org JSON-LD for a page; output with `| safe` inside <script type="application/ld+json">. */
+  eleventyConfig.addFilter("structuredData", (pageKey, lang) => structuredData(i18n, pageKey, lang));
+
   eleventyConfig.addGlobalData("build", { year: new Date().getFullYear() });
 
   // Static files copied as-is to the site root.
   eleventyConfig.addPassthroughCopy({ [`${SRC}/assets`]: "assets" });
   eleventyConfig.addPassthroughCopy({ [`${SRC}/CNAME`]: "CNAME" });
   eleventyConfig.addPassthroughCopy({ [`${SRC}/robots.txt`]: "robots.txt" });
-
   return {
     dir: {
       input: SRC,

@@ -1,0 +1,33 @@
+{# Anonymised architecture of the NDA case. Deliberately generic: it shows the class of system,
+   never the client's real topology. Built in HTML (not SVG text) so labels translate and reflow. #}
+{% set d = h.work.diagram %}
+<figure class="arch" aria-labelledby="arch-caption">
+  <ol class="arch__flow">
+    <li class="arch__node">
+      <svg class="arch__icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><path d="M7 7h10v10H7zM10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg>
+      <span class="arch__label">{{ d.machines }}</span>
+    </li>
+    <li class="arch__node arch__node--hub">
+      <svg class="arch__icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="2"/><path d="M8.5 15.5a5 5 0 0 1 0-7M15.5 8.5a5 5 0 0 1 0 7M5.6 18.4a9 9 0 0 1 0-12.8M18.4 5.6a9 9 0 0 1 0 12.8"/></svg>
+      <span class="arch__label">{{ d.hub }}</span>
+      <span class="arch__note">{{ d.hubNote }}</span>
+    </li>
+    <li class="arch__node">
+      <svg class="arch__icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><path d="M8 4C6 4 5 5 5 7v3c0 1-1 2-2 2 1 0 2 1 2 2v3c0 2 1 3 3 3M16 4c2 0 3 1 3 3v3c0 1 1 2 2 2-1 0-2 1-2 2v3c0 2-1 3-3 3"/></svg>
+      <span class="arch__label">{{ d.api }}</span>
+    </li>
+    <li class="arch__node">
+      <svg class="arch__icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><path d="M4 6c0 1.7 3.6 3 8 3s8-1.3 8-3-3.6-3-8-3-8 1.3-8 3zM4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+      <span class="arch__label">{{ d.data }}</span>
+    </li>
+  </ol>
+  <div class="arch__pipeline">
+    <span class="arch__pipeline-label">{{ d.pipelineLabel }}</span>
+    <ol class="arch__steps">
+      {% for step in d.pipeline %}
+      <li>{{ step }}</li>
+      {% endfor %}
+    </ol>
+  </div>
+  <figcaption id="arch-caption" class="arch__caption">{{ d.caption }}</figcaption>
+</figure>

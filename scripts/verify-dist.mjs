@@ -76,7 +76,23 @@ for (const f of files.filter((x) => x.endsWith(".html"))) {
     if (/target="_blank"/i.test(tag) && !/noopener/i.test(tag)) fail(f, `target=_blank without noopener: ${href}`);
   }
 
-  // JSON-LD blocks must be valid JSON.
+  // Every same-origin asset referenced by the page must exist in the build.
+  const refs = [
+    ...[...html.matchAll(/<(?:img|source)\b[^>]*\ssrc="([^"]+)"/gi)].map((r) => r[1]),
+    ...[...html.matchAll(/<link\b[^>]*\shref="([^"]+)"/gi)].map((r) => r[1]),
+    ...[...html.matchAll(/<meta\b[^>]*property="og:image"[^>]*content="([^"]+)"/gi)].map((r) => r[1]),
+  ];
+  for (const ref of refs) {
+    if (isExternal(ref) || /^(mailto:|#|data:)/.test(ref)) continue;
+    const local = ref.replace(SITE_ORIGIN, "").split(/[?#]/)[0];
+    const target = path.join(DIST, local, local.endsWith("/") ? "index.html" : "");
+    if (!fs.existsSync(target)) fail(f, `referenced file does not exist: ${ref}`);
+  }
+
+  // JSON-LD blocks must be valid JSON; their same-origin image URLs must exist.
+  for (const m of html.matchAll(/https:\/\/hdntechnologies\.com(\/assets\/[^"\s]+)/g)) {
+    if (!fs.existsSync(path.join(DIST, m[1]))) fail(f, `structured-data asset does not exist: ${m[1]}`);
+  }
   for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi)) {
     try { JSON.parse(m[1]); } catch (e) { fail(f, `invalid JSON-LD: ${e.message}`); }
   }

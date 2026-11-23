@@ -1,0 +1,46 @@
+---
+permalink: /llms.txt
+eleventyExcludeFromCollections: true
+---
+{#- Plain text (not HTML): values are output with `safe` so "&" is not turned into "&amp;". -#}
+{%- set en = "home" | t("en") -%}
+# {{ site.brand | safe }}
+
+> {{ en.description | safe }}
+
+{{ site.brand | safe }} is the trading name of {{ site.legalName | safe }} ({{ site.legalNameLatin | safe }}), a company registered in the Bulgarian Commercial Register.
+
+- Legal name: {{ site.legalName | safe }} ({{ site.legalNameLatin | safe }})
+- UIC (ЕИК): {{ site.eik }}
+- VAT: {{ site.vatId }}
+- Founded: {{ site.foundingDate }}
+- Location: {{ site.locality }}, Bulgaria
+- Serves: Bulgaria and the European Union
+- Working languages: English, Bulgarian
+- Email: {{ site.email }}
+- LinkedIn: {{ site.linkedin }}
+
+## Pages
+
+{% for alt in "home" | alternates %}
+- [{{ "home.title" | t(alt.code) | safe }}]({{ site.url }}{{ alt.url }}) ({{ alt.endonym }}): services, selected work, engagement process, FAQ and contact
+{% endfor %}
+{% for alt in "privacy" | alternates %}
+- [{{ "privacy.heading" | t(alt.code) | safe }}]({{ site.url }}{{ alt.url }}) ({{ alt.endonym }}): data controller details and GDPR information
+{% endfor %}
+
+## Services
+
+{% for s in en.services.items %}
+- {{ s.title | safe }}: {{ s.forWhom | safe }} {{ s.body | safe }}
+{% endfor %}
+
+## Selected work
+
+- {{ en.work.case.title | safe }} ({{ en.work.case.meta | safe }}). {{ en.work.case.context | safe }} Scope: {{ en.work.case.scope | join("; ") | safe }}. {{ en.work.case.nda | safe }}
+
+## FAQ
+
+{% for item in en.faq.items %}
+- {{ item.q | safe }} {{ item.a | safe }}
+{% endfor %}

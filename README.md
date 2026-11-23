@@ -26,15 +26,23 @@ src/
     pages.json         page keys -> paths, shared by every language
     i18n/<code>.json   all visible text per language (en.json is the reference)
   _includes/
-    layouts/base.njk   <head>, CSP, canonical/hreflang, header, footer
+    layouts/base.njk   <head>, CSP, canonical/hreflang, OpenGraph, JSON-LD, header, footer
     partials/          header, footer, language switcher
+    diagrams/          inline SVG illustrations and the anonymised architecture figure
   pages/               home, privacy, 404 – each generated once per enabled language
   assets/              CSS and images, copied as-is
   sitemap.xml.njk      generated from pages.json x locales.json
+  llms.txt.njk         AI-readable site summary, generated from the same strings
   robots.txt, CNAME    copied as-is
+design/brand-assets.html source for og.png, logo-512.png and apple-touch-icon.png (not published)
 scripts/verify-dist.mjs  zero-dependency checks on the built output
-eleventy.config.js       translation loader/validator and URL filters
+eleventy.config.js       translation loader/validator, URL filters, JSON-LD generator
 ```
+
+Structured data (Organization/ProfessionalService, WebSite, WebPage, Service, FAQPage, BreadcrumbList) is built
+in `eleventy.config.js` from the same translation strings as the visible page, so it cannot drift from the content.
+
+The automotive case study is under NDA: never add client names, brands, screenshots, metrics or the real topology.
 
 `_site/` is the build output and the **only** directory deployed to GitHub Pages.
 
@@ -74,7 +82,7 @@ GitHub Pages cannot send custom HTTP headers, so the baseline is:
 
 - [ ] Legal review of the privacy notice (`src/_data/i18n/en.json` -> `privacy`): confirm retention periods and
       name the email provider as a recipient.
-- [ ] Bulgarian translation (`bg.json`) – Phase 2.
-- [ ] NDA-safe automotive case study, SVG diagrams, FAQ, JSON-LD, OpenGraph image, `llms.txt` – Phase 2.
+- [ ] Native-speaker review of the Bulgarian copy (`src/_data/i18n/bg.json`), especially the privacy notice.
+- [ ] Confirm the NDA wording of the automotive case study (`home.work` in both translation files).
 - [ ] `/.well-known/security.txt`, accessibility and Lighthouse CI checks – Phase 3.
 - [ ] Verify the custom domain and enable "Enforce HTTPS" in the repository's Pages settings.

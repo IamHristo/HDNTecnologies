@@ -13,5 +13,21 @@
   "email": "sales@hdntechnologies.com",
   "linkedin": "https://www.linkedin.com/company/hdn-technologies",
   "commercialRegisterUrl": "https://portal.registryagency.bg/CR/en/Reports/ActiveConditionTabResult?uic=207848269",
-  "themeColor": "#1d3557"
+  "themeColor": "#1d3557",
+  "logo": "/assets/img/logo-512.png",
+  "ogImage": "/assets/img/og.png",
+  "ogImageWidth": 1200,
+  "ogImageHeight": 630,
+  "knowsAbout": [
+    "Software architecture",
+    "System design",
+    "System integration",
+    "API design",
+    "Real-time communication",
+    "SignalR",
+    "Data flows",
+    "Database design",
+    "CI/CD"
+  ],
+  "workingLanguages": ["en", "bg"]
 }

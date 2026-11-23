@@ -12,19 +12,22 @@ permalink: "{{ locale.prefix }}/index.html"
 {% set mailto = "mailto:" + site.email + "?subject=" + (h.contact.mailSubject | urlencode) %}
 
 <section class="hero" aria-labelledby="hero-title">
-  <div class="container hero__inner">
+  <div class="container hero__grid">
+  <div class="hero__inner">
     <p class="hero__eyebrow">{{ h.hero.eyebrow }}</p>
     <h1 id="hero-title" class="hero__title">{{ h.hero.title }}</h1>
     <p class="hero__lead">{{ h.hero.lead }}</p>
     <div class="cluster">
       <a class="btn btn--primary" href="{{ mailto }}">{{ h.hero.ctaPrimary }}</a>
-      <a class="btn btn--ghost" href="#services">{{ h.hero.ctaSecondary }}</a>
+      <a class="btn btn--ghost" href="#work">{{ h.hero.ctaSecondary }}</a>
     </div>
     <ul class="facts" aria-label="{{ h.facts.label }}">
       {% for fact in h.facts.items %}
       <li>{{ fact }}</li>
       {% endfor %}
     </ul>
+  </div>
+  {% include "diagrams/hero.svg.njk" %}
   </div>
 </section>
 
@@ -35,6 +38,7 @@ permalink: "{{ locale.prefix }}/index.html"
     <ul class="card-grid">
       {% for service in h.services.items %}
       <li class="card" id="service-{{ service.id }}">
+        {% include "diagrams/" + service.id + ".svg.njk" %}
         <h3 class="card__title">{{ service.title }}</h3>
         <p class="card__for">{{ service.forWhom }}</p>
         <p>{{ service.body }}</p>
@@ -44,7 +48,43 @@ permalink: "{{ locale.prefix }}/index.html"
   </div>
 </section>
 
-<section id="process" class="section section--alt" aria-labelledby="process-title">
+{% set c = h.work.case %}
+<section id="work" class="section section--alt" aria-labelledby="work-title">
+  <div class="container">
+    <h2 id="work-title" class="section__title">{{ h.work.title }}</h2>
+    <p class="section__intro">{{ h.work.intro }}</p>
+    <article class="case" aria-labelledby="case-title">
+      <header class="case__header">
+        <h3 id="case-title" class="case__title">{{ c.title }}</h3>
+        <p class="case__meta">{{ c.meta }}</p>
+        <p class="case__nda">
+          <svg class="icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path class="ic" d="M6 11h12v10H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3"/></svg>
+          {{ c.nda }}
+        </p>
+      </header>
+      <div class="case__body">
+        <div class="case__text">
+          <div class="case__context">
+            <p>{{ c.context }}</p>
+            <h4 class="case__subtitle">{{ c.outcomeTitle }}</h4>
+            <p>{{ c.outcome }}</p>
+          </div>
+          <div>
+            <h4 class="case__subtitle">{{ c.scopeTitle }}</h4>
+            <ul class="checklist">
+              {% for item in c.scope %}
+              <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        {% include "diagrams/architecture.njk" %}
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="process" class="section" aria-labelledby="process-title">
   <div class="container">
     <h2 id="process-title" class="section__title">{{ h.process.title }}</h2>
     <p class="section__intro">{{ h.process.intro }}</p>
@@ -56,6 +96,21 @@ permalink: "{{ locale.prefix }}/index.html"
       </li>
       {% endfor %}
     </ol>
+  </div>
+</section>
+
+<section id="faq" class="section section--alt" aria-labelledby="faq-title">
+  <div class="container">
+    <h2 id="faq-title" class="section__title">{{ h.faq.title }}</h2>
+    {# Visible text is the exact source of the FAQPage JSON-LD (see structuredData in eleventy.config.js). #}
+    <div class="faq">
+      {% for item in h.faq.items %}
+      <details class="faq__item">
+        <summary class="faq__q">{{ item.q }}</summary>
+        <p class="faq__a">{{ item.a }}</p>
+      </details>
+      {% endfor %}
+    </div>
   </div>
 </section>
 
