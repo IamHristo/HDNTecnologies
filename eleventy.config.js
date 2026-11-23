@@ -204,6 +204,16 @@ export default function (eleventyConfig) {
     return i18n.locales.map((l) => ({ ...l, url: `${l.prefix}${i18n.pages[pageKey]}` }));
   });
 
+  /**
+   * mailto: link with a prefilled subject carrying a source tag, e.g. "Project enquiry · ref: hero-en".
+   * The site has no analytics, so the tag in the subject is how enquiries are attributed to a link.
+   */
+  eleventyConfig.addFilter("mailto", (ref, lang) => {
+    if (!/^[a-z0-9-]+$/.test(ref)) throw new Error(`Invalid mailto ref "${ref}" (use a-z, 0-9, -).`);
+    const subject = `${i18n.strings[lang].home.contact.mailSubject} · ref: ${ref}-${lang}`;
+    return `mailto:${i18n.site.email}?subject=${encodeURIComponent(subject)}`;
+  });
+
   /** schema.org JSON-LD for a page; output with `| safe` inside <script type="application/ld+json">. */
   eleventyConfig.addFilter("structuredData", (pageKey, lang) => structuredData(i18n, pageKey, lang));
 

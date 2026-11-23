@@ -10,7 +10,7 @@
         <div><dt class="visually-hidden">{{ f.locationLabel }}</dt><dd>{{ f.location }}</dd></div>
         <div><dt>{{ f.eik }}</dt><dd>{{ site.eik }}</dd></div>
         <div><dt>{{ f.vat }}</dt><dd>{{ site.vatId }}</dd></div>
-        <div><dt class="visually-hidden">{{ f.emailLabel }}</dt><dd><a href="mailto:{{ site.email }}">{{ site.email }}</a></dd></div>
+        <div><dt class="visually-hidden">{{ f.emailLabel }}</dt><dd><a href="{{ ('footer-' + pageKey) | lower | mailto(locale.code) }}">{{ site.email }}</a></dd></div>
       </dl>
     </section>
     <ul class="footer-links">

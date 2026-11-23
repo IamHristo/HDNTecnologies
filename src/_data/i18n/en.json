@@ -164,7 +164,8 @@
         "Your company and your role",
         "The systems or product involved",
         "What you want to achieve, and by when",
-        "Whether you need an NDA before sharing details"
+        "Whether you need an NDA before sharing details",
+        "How you heard about us"
       ],
       "privacyNote": "We use the details in your email only to reply to your enquiry. See our",
       "privacyLink": "privacy notice"

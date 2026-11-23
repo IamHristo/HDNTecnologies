@@ -9,7 +9,6 @@ pagination:
 permalink: "{{ locale.prefix }}/index.html"
 ---
 {% set h = "home" | t(locale.code) %}
-{% set mailto = "mailto:" + site.email + "?subject=" + (h.contact.mailSubject | urlencode) %}
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="container hero__grid">
@@ -18,7 +17,7 @@ permalink: "{{ locale.prefix }}/index.html"
     <h1 id="hero-title" class="hero__title">{{ h.hero.title }}</h1>
     <p class="hero__lead">{{ h.hero.lead }}</p>
     <div class="cluster">
-      <a class="btn btn--primary" href="{{ mailto }}">{{ h.hero.ctaPrimary }}</a>
+      <a class="btn btn--primary" href="{{ 'hero' | mailto(locale.code) }}">{{ h.hero.ctaPrimary }}</a>
       <a class="btn btn--ghost" href="#work">{{ h.hero.ctaSecondary }}</a>
     </div>
     <ul class="facts" aria-label="{{ h.facts.label }}">
@@ -119,8 +118,8 @@ permalink: "{{ locale.prefix }}/index.html"
     <div class="contact__main">
       <h2 id="contact-title" class="section__title">{{ h.contact.title }}</h2>
       <p class="section__intro">{{ h.contact.intro }}</p>
-      <p><a class="btn btn--primary" href="{{ mailto }}">{{ h.contact.cta }}</a></p>
-      <p class="contact__email">{{ h.contact.emailLabel }}: <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+      <p><a class="btn btn--primary" href="{{ 'contact' | mailto(locale.code) }}">{{ h.contact.cta }}</a></p>
+      <p class="contact__email">{{ h.contact.emailLabel }}: <a href="{{ 'contact-email' | mailto(locale.code) }}">{{ site.email }}</a></p>
       <p class="contact__note">{{ h.contact.privacyNote }} <a href="{{ 'privacy' | localeUrl(locale.code) }}">{{ h.contact.privacyLink }}</a>.</p>
     </div>
     <div class="contact__aside">
