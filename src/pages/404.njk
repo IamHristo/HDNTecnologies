@@ -1,0 +1,23 @@
+---
+layout: layouts/base.njk
+pageKey: notFound
+indexable: false
+permalink: /404.html
+---
+{# GitHub Pages serves this single file for every missing path, at any depth. All URLs here are
+   root-absolute so styles and links work at /a/b/c too. The message is shown in every enabled language. #}
+<section class="section not-found" aria-labelledby="nf-title">
+  <div class="container prose">
+    <h1 id="nf-title">{{ "notFound.title" | t(locale.code) }}</h1>
+    <p>{{ "notFound.body" | t(locale.code) }}</p>
+    <p><a class="btn btn--primary" href="{{ 'home' | localeUrl(locale.code) }}">{{ "notFound.backHome" | t(locale.code) }}</a></p>
+    {% for other in locales %}
+    {% if other.code != locale.code %}
+    <div class="not-found__alt" lang="{{ other.hreflang }}">
+      <p><strong>{{ "notFound.title" | t(other.code) }}.</strong> {{ "notFound.body" | t(other.code) }}
+        <a href="{{ 'home' | localeUrl(other.code) }}">{{ "notFound.backHome" | t(other.code) }}</a></p>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>

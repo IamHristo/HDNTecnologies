@@ -1,0 +1,24 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+{# lastmod is omitted on purpose: CI checkouts have no meaningful file dates, and a wrong lastmod is worse than none. #}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+{% for pageKey, path in pages %}
+{% set alts = pageKey | alternates %}
+{% for alt in alts %}
+  <url>
+    <loc>{{ site.url }}{{ alt.url }}</loc>
+{% if alts.length > 1 %}
+{% for other in alts %}
+    <xhtml:link rel="alternate" hreflang="{{ other.hreflang }}" href="{{ site.url }}{{ other.url }}"/>
+{% endfor %}
+{% for other in alts %}{% if other.isDefault %}
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ site.url }}{{ other.url }}"/>
+{% endif %}{% endfor %}
+{% endif %}
+  </url>
+{% endfor %}
+{% endfor %}
+</urlset>

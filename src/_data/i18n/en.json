@@ -1,0 +1,155 @@
+{
+  "common": {
+    "skipLink": "Skip to main content",
+    "navLabel": "Primary",
+    "nav": {
+      "services": "Services",
+      "process": "Process",
+      "contact": "Contact"
+    },
+    "langSwitchLabel": "Language",
+    "homeLinkLabel": "HDN Technologies – home",
+    "footer": {
+      "legalLabel": "Company details",
+      "locationLabel": "Location",
+      "location": "Plovdiv, Bulgaria",
+      "emailLabel": "Email",
+      "eik": "UIC (ЕИК)",
+      "vat": "VAT",
+      "register": "Commercial Register record",
+      "privacy": "Privacy",
+      "linkedin": "LinkedIn",
+      "copyright": "All rights reserved."
+    }
+  },
+  "home": {
+    "title": "HDN Technologies – Software Development & System Integration | Plovdiv, EU",
+    "description": "HDN Technologies is a software engineering company in Plovdiv, Bulgaria. We build custom software, integrate business systems and engineer real-time machine-to-cloud communication for businesses across the EU.",
+    "hero": {
+      "eyebrow": "Software engineering · Plovdiv, Bulgaria",
+      "title": "Software engineering and system integration from Plovdiv, for businesses across the EU.",
+      "lead": "HDN Technologies is a Bulgarian engineering company. We build custom software, connect business systems, and engineer real-time communication between machines and cloud services – including remote-service communication for the automotive industry.",
+      "ctaPrimary": "Email us about your project",
+      "ctaSecondary": "See our services"
+    },
+    "facts": {
+      "label": "Key facts",
+      "items": [
+        "Registered EU company",
+        "Plovdiv, Bulgaria",
+        "VAT BG207848269",
+        "Founder-led delivery"
+      ]
+    },
+    "services": {
+      "title": "Services",
+      "intro": "We take responsibility for the engineering: from the first architecture decision to a system running in production.",
+      "items": [
+        {
+          "id": "consulting",
+          "title": "Consulting",
+          "forWhom": "For teams planning a new system or modernising an existing one.",
+          "body": "Architecture reviews, technology selection and modernisation roadmaps. You get a written assessment of your current landscape and a concrete, prioritised plan your team can act on."
+        },
+        {
+          "id": "integration",
+          "title": "System Integration",
+          "forWhom": "For companies whose ERP, CRM, e-commerce or industrial systems need to work together.",
+          "body": "We design and build the interfaces and data flows between your systems, so the right data reaches the right place reliably – and the integration keeps working when one side changes."
+        },
+        {
+          "id": "development",
+          "title": "Software Development",
+          "forWhom": "For products and internal tools that off-the-shelf software cannot cover.",
+          "body": "Custom backends, APIs and applications, from concept to a maintained production system – including databases, automated CI/CD pipelines and documentation."
+        }
+      ]
+    },
+    "process": {
+      "title": "How an engagement works",
+      "intro": "A clear, predictable path from first conversation to a running system.",
+      "steps": [
+        {
+          "title": "Introductory call",
+          "body": "We discuss your goals, existing systems and constraints, and whether we are the right fit."
+        },
+        {
+          "title": "Technical assessment",
+          "body": "We review the current landscape and propose an architecture, scope and delivery plan in writing."
+        },
+        {
+          "title": "Iterative delivery",
+          "body": "We build in short increments with regular demos, so you see progress and can adjust priorities early."
+        },
+        {
+          "title": "Handover and support",
+          "body": "Documentation, deployment pipelines and knowledge transfer – plus ongoing support if you need it."
+        }
+      ]
+    },
+    "contact": {
+      "title": "Contact",
+      "intro": "The fastest way to start is a short email describing what you need.",
+      "cta": "Email us about your project",
+      "mailSubject": "Project enquiry",
+      "emailLabel": "Email",
+      "includeTitle": "Helpful to include",
+      "include": [
+        "Your company and your role",
+        "The systems or product involved",
+        "What you want to achieve, and by when",
+        "Whether you need an NDA before sharing details"
+      ],
+      "privacyNote": "We use the details in your email only to reply to your enquiry. See our",
+      "privacyLink": "privacy notice"
+    }
+  },
+  "privacy": {
+    "title": "Privacy notice – HDN Technologies",
+    "description": "How HDN Technologies processes personal data when you visit this website or contact us by email.",
+    "heading": "Privacy notice",
+    "updatedLabel": "Last updated",
+    "updated": "2026-11-23",
+    "sections": [
+      {
+        "title": "Who is responsible",
+        "paragraphs": [
+          "The controller of your personal data is Ейч Ди Ен Технолоджийс ЕООД (HDN Technologies EOOD), registered in the Bulgarian Commercial Register under UIC (ЕИК) 207848269, VAT number BG207848269, based in Plovdiv, Bulgaria.",
+          "You can contact us about data protection at sales@hdntechnologies.com."
+        ]
+      },
+      {
+        "title": "Visiting this website",
+        "paragraphs": [
+          "This website is a static site. It sets no cookies, uses no analytics or tracking, and loads no fonts, scripts or other resources from third parties.",
+          "The site is hosted on GitHub Pages, operated by GitHub, Inc. (USA). When you load a page, GitHub processes technical data such as your IP address in its server logs to deliver the site and keep it secure. Transfers to the USA rely on the EU–US Data Privacy Framework. Our legal basis is our legitimate interest in operating a secure website (Art. 6(1)(f) GDPR)."
+        ],
+        "link": {
+          "text": "GitHub General Privacy Statement",
+          "href": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+        }
+      },
+      {
+        "title": "Contacting us by email",
+        "paragraphs": [
+          "If you email us, we process your name, email address and the content of your message to answer your enquiry and, where relevant, to prepare or perform a contract (Art. 6(1)(b) GDPR) or based on our legitimate interest in responding to business correspondence (Art. 6(1)(f) GDPR).",
+          "We keep this correspondence only as long as needed to handle your enquiry and any resulting business relationship, or as long as Bulgarian law requires."
+        ]
+      },
+      {
+        "title": "Your rights",
+        "paragraphs": [
+          "You have the right to access, rectify and erase your data, to restrict or object to its processing, and to data portability. To exercise these rights, email sales@hdntechnologies.com.",
+          "You also have the right to lodge a complaint with a supervisory authority. In Bulgaria, this is the Commission for Personal Data Protection (Комисия за защита на личните данни, cpdp.bg)."
+        ]
+      }
+    ],
+    "backHome": "Back to the home page"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or has moved.",
+    "body": "The page you are looking for does not exist or has moved.",
+    "backHome": "Go to the home page"
+  }
+}

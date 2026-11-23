@@ -1,0 +1,116 @@
+import fs from "node:fs";
+import path from "node:path";
+
+const SRC = "src";
+const DATA_DIR = path.join(SRC, "_data");
+const I18N_DIR = path.join(DATA_DIR, "i18n");
+
+const readJson = (file) => JSON.parse(fs.readFileSync(file, "utf8"));
+
+/** Collect every leaf path of a nested object/array, e.g. "home.hero.title" or "home.facts.items.0". */
+function leafPaths(value, prefix = "") {
+  if (value !== null && typeof value === "object") {
+    return Object.entries(value).flatMap(([key, child]) =>
+      leafPaths(child, prefix ? `${prefix}.${key}` : key),
+    );
+  }
+  return [prefix];
+}
+
+/**
+ * Load locales, page paths and translation strings, and fail the build if any
+ * enabled locale is missing (or has extra) keys compared to the default locale.
+ * A non-default page must never silently fall back to English.
+ */
+function loadI18n() {
+  const locales = readJson(path.join(DATA_DIR, "locales.json"));
+  const pages = readJson(path.join(DATA_DIR, "pages.json"));
+  const defaults = locales.filter((l) => l.isDefault);
+  if (defaults.length !== 1) {
+    throw new Error(`locales.json must mark exactly one locale as isDefault (found ${defaults.length}).`);
+  }
+  const defaultLocale = defaults[0];
+
+  const strings = {};
+  for (const locale of locales) {
+    const file = path.join(I18N_DIR, `${locale.code}.json`);
+    if (!fs.existsSync(file)) {
+      throw new Error(`Locale "${locale.code}" is enabled in locales.json but ${file} does not exist.`);
+    }
+    strings[locale.code] = readJson(file);
+  }
+
+  const reference = new Set(leafPaths(strings[defaultLocale.code]));
+  for (const locale of locales) {
+    if (locale.code === defaultLocale.code) continue;
+    const keys = new Set(leafPaths(strings[locale.code]));
+    const missing = [...reference].filter((k) => !keys.has(k));
+    const extra = [...keys].filter((k) => !reference.has(k));
+    if (missing.length || extra.length) {
+      throw new Error(
+        `Translation "${locale.code}" does not match "${defaultLocale.code}".\n` +
+          (missing.length ? `  Missing keys:\n    ${missing.join("\n    ")}\n` : "") +
+          (extra.length ? `  Extra keys:\n    ${extra.join("\n    ")}\n` : ""),
+      );
+    }
+  }
+
+  return { locales, pages, strings, defaultLocale };
+}
+
+export default function (eleventyConfig) {
+  let i18n = loadI18n();
+  // Reload translations on every build so `npm run serve` picks up JSON edits.
+  eleventyConfig.on("eleventy.before", () => {
+    i18n = loadI18n();
+  });
+  eleventyConfig.addWatchTarget(I18N_DIR);
+
+  eleventyConfig.setNunjucksEnvironmentOptions({
+    autoescape: true,
+    throwOnUndefined: true,
+    trimBlocks: true,
+    lstripBlocks: true,
+  });
+
+  /** Translate a dotted key for a locale; throws on any missing key. */
+  eleventyConfig.addFilter("t", (key, lang) => {
+    const value = key.split(".").reduce((node, part) => (node == null ? undefined : node[part]), i18n.strings[lang]);
+    if (value === undefined) {
+      throw new Error(`Missing translation "${key}" for locale "${lang}".`);
+    }
+    return value;
+  });
+
+  /** Site-relative URL of a page (by key from pages.json) in a given locale. */
+  eleventyConfig.addFilter("localeUrl", (pageKey, lang) => {
+    const locale = i18n.locales.find((l) => l.code === lang);
+    if (!locale) throw new Error(`Unknown locale "${lang}".`);
+    if (!(pageKey in i18n.pages)) throw new Error(`Unknown page key "${pageKey}" (see pages.json).`);
+    return `${locale.prefix}${i18n.pages[pageKey]}`;
+  });
+
+  /** Every locale version of a page, used for hreflang, the sitemap and the language switcher. */
+  eleventyConfig.addFilter("alternates", (pageKey) => {
+    if (!(pageKey in i18n.pages)) throw new Error(`Unknown page key "${pageKey}" (see pages.json).`);
+    return i18n.locales.map((l) => ({ ...l, url: `${l.prefix}${i18n.pages[pageKey]}` }));
+  });
+
+  eleventyConfig.addGlobalData("build", { year: new Date().getFullYear() });
+
+  // Static files copied as-is to the site root.
+  eleventyConfig.addPassthroughCopy({ [`${SRC}/assets`]: "assets" });
+  eleventyConfig.addPassthroughCopy({ [`${SRC}/CNAME`]: "CNAME" });
+  eleventyConfig.addPassthroughCopy({ [`${SRC}/robots.txt`]: "robots.txt" });
+
+  return {
+    dir: {
+      input: SRC,
+      includes: "_includes",
+      data: "_data",
+      output: "_site",
+    },
+    templateFormats: ["njk"],
+    htmlTemplateEngine: "njk",
+  };
+}

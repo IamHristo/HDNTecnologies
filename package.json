@@ -1,0 +1,19 @@
+{
+  "name": "hdntechnologies-website",
+  "private": true,
+  "description": "Static multilingual website for HDN Technologies, built with Eleventy and deployed to GitHub Pages.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "eleventy",
+    "verify": "node scripts/verify-dist.mjs _site",
+    "check": "npm run build && npm run verify",
+    "serve": "eleventy --serve --port=8080",
+    "clean": "node -e \"require('fs').rmSync('_site',{recursive:true,force:true})\""
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.7"
+  }
+}

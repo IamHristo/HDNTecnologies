@@ -1,0 +1,17 @@
+{% set homeUrl = "home" | localeUrl(locale.code) %}
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="{{ homeUrl }}"{% if pageKey == "home" %} aria-current="page"{% endif %}>
+      <img class="brand__logo" src="/assets/img/favicon.svg" alt="" width="32" height="32">
+      <span class="brand__name">{{ site.brand }}</span>
+    </a>
+    <nav class="site-nav" aria-label="{{ 'common.navLabel' | t(locale.code) }}">
+      <ul class="site-nav__list">
+        <li><a href="{{ homeUrl }}#services">{{ "common.nav.services" | t(locale.code) }}</a></li>
+        <li><a href="{{ homeUrl }}#process">{{ "common.nav.process" | t(locale.code) }}</a></li>
+        <li><a href="{{ homeUrl }}#contact">{{ "common.nav.contact" | t(locale.code) }}</a></li>
+      </ul>
+    </nav>
+    {% include "partials/lang-switch.njk" %}
+  </div>
+</header>

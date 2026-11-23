@@ -1,0 +1,35 @@
+{# Language switcher without JavaScript. Up to 3 languages: inline links. More: a native <details> disclosure.
+   Each link points to the same page in the other language and is labelled with the language's own name. #}
+{% if locales.length > 1 and pageKey in pages %}
+{% set langLabel = "common.langSwitchLabel" | t(locale.code) %}
+{% if locales.length <= 3 %}
+<nav class="lang-switch" aria-label="{{ langLabel }}">
+  <ul class="lang-switch__list">
+    {% for alt in pageKey | alternates %}
+    <li>
+      {% if alt.code == locale.code %}
+      <a href="{{ alt.url }}" lang="{{ alt.hreflang }}" hreflang="{{ alt.hreflang }}" aria-current="true">{{ alt.endonym }}</a>
+      {% else %}
+      <a href="{{ alt.url }}" lang="{{ alt.hreflang }}" hreflang="{{ alt.hreflang }}">{{ alt.endonym }}</a>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</nav>
+{% else %}
+<details class="lang-switch lang-switch--menu">
+  <summary><span class="visually-hidden">{{ langLabel }}: </span>{{ locale.endonym }}</summary>
+  <ul class="lang-switch__list">
+    {% for alt in pageKey | alternates %}
+    <li>
+      {% if alt.code == locale.code %}
+      <a href="{{ alt.url }}" lang="{{ alt.hreflang }}" hreflang="{{ alt.hreflang }}" aria-current="true">{{ alt.endonym }}</a>
+      {% else %}
+      <a href="{{ alt.url }}" lang="{{ alt.hreflang }}" hreflang="{{ alt.hreflang }}">{{ alt.endonym }}</a>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</details>
+{% endif %}
+{% endif %}
