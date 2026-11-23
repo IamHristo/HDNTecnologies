@@ -73,8 +73,8 @@ function structuredData(i18n, pageKey, lang) {
   const pageUrl = urlOf(pageKey);
 
   const areaServed = [
-    { "@type": "Country", name: "Bulgaria" },
-    { "@type": "AdministrativeArea", name: "European Union" },
+    { "@type": "Country", name: "Bulgaria", sameAs: "https://www.wikidata.org/wiki/Q219" },
+    { "@type": "AdministrativeArea", name: "European Union", sameAs: "https://www.wikidata.org/wiki/Q458" },
   ];
 
   const organization = {
@@ -94,13 +94,20 @@ function structuredData(i18n, pageKey, lang) {
     address: {
       "@type": "PostalAddress",
       addressLocality: site.locality,
+      addressRegion: site.locality,
       postalCode: site.postalCode,
       addressCountry: site.countryCode,
     },
     areaServed,
     knowsAbout: site.knowsAbout,
     knowsLanguage: site.workingLanguages,
-    sameAs: [site.linkedin],
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "sales",
+      email: site.email,
+      availableLanguage: site.workingLanguages,
+    },
+    sameAs: [site.linkedin, site.commercialRegisterUrl],
   };
 
   const website = {
@@ -116,7 +123,8 @@ function structuredData(i18n, pageKey, lang) {
     "@type": "WebPage",
     "@id": `${pageUrl}#webpage`,
     url: pageUrl,
-    name: s[pageKey].title,
+    // The visible page heading, not the <title> (which carries the brand suffix).
+    name: pageKey === "home" ? s.home.hero.title : s[pageKey].heading,
     description: s[pageKey].description,
     inLanguage: locale.hreflang,
     isPartOf: { "@id": siteId },
@@ -125,19 +133,40 @@ function structuredData(i18n, pageKey, lang) {
 
   const graph = [organization, website, webpage];
 
-  if (pageKey === "home") {
-    for (const item of s.home.services.items) {
+  if (pageKey === "services") {
+    for (const item of s.services.items) {
       graph.push({
         "@type": "Service",
         "@id": `${pageUrl}#service-${item.id}`,
+        url: `${pageUrl}#service-${item.id}`,
         name: item.title,
         serviceType: item.title,
-        description: `${item.forWhom} ${item.body}`,
+        description: item.summary,
         provider: { "@id": orgId },
         areaServed,
-        inLanguage: locale.hreflang,
       });
     }
+  }
+
+  if (pageKey === "caseTeleservice") {
+    const c = s.caseTeleservice;
+    graph.push({
+      "@type": "Article",
+      "@id": `${pageUrl}#article`,
+      headline: c.heading,
+      description: c.description,
+      inLanguage: locale.hreflang,
+      image: `${site.url}${site.ogImage}`,
+      author: { "@id": orgId },
+      publisher: { "@id": orgId },
+      mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+      about: s.services.items.map((item) => ({ "@id": `${urlOf("services")}#service-${item.id}` })),
+      // Emitted only once a real publication date is recorded in site.json; never invented.
+      ...(site.casePublished ? { datePublished: site.casePublished } : {}),
+    });
+  }
+
+  if (pageKey === "home") {
     graph.push({
       "@type": "FAQPage",
       "@id": `${pageUrl}#faq`,

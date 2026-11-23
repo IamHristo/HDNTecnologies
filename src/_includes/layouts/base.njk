@@ -20,7 +20,7 @@
   {% endfor %}
   <link rel="alternate" hreflang="x-default" href="{{ site.url }}{{ pageKey | localeUrl(defaultLocale.code) }}">
   {% endif %}
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="{{ 'article' if pageKey == 'caseTeleservice' else 'website' }}">
   <meta property="og:site_name" content="{{ site.brand }}">
   <meta property="og:title" content="{{ (pageKey + '.title') | t(locale.code) }}">
   <meta property="og:description" content="{{ (pageKey + '.description') | t(locale.code) }}">

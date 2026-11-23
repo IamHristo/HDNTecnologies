@@ -13,6 +13,13 @@
         <div><dt class="visually-hidden">{{ f.emailLabel }}</dt><dd><a href="{{ ('footer-' + pageKey) | lower | mailto(locale.code) }}">{{ site.email }}</a></dd></div>
       </dl>
     </section>
+    <nav class="footer-nav" aria-label="{{ f.siteLabel }}">
+      <ul class="footer-links">
+        {% for key in ["whyUs", "services", "caseTeleservice"] %}
+        <li><a href="{{ key | localeUrl(locale.code) }}"{% if pageKey == key %} aria-current="page"{% endif %}>{{ ("common.nav." + key) | t(locale.code) }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
     <ul class="footer-links">
       <li><a href="{{ 'privacy' | localeUrl(locale.code) }}"{% if pageKey == "privacy" %} aria-current="page"{% endif %}>{{ f.privacy }}</a></li>
       <li><a href="{{ site.commercialRegisterUrl }}" rel="external noopener noreferrer">{{ f.register }}</a></li>

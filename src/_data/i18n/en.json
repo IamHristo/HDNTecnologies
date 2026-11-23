@@ -3,16 +3,24 @@
     "skipLink": "Skip to main content",
     "navLabel": "Primary",
     "nav": {
+      "whyUs": "Why us",
       "services": "Services",
-      "work": "Work",
-      "process": "Process",
+      "caseTeleservice": "Case study",
+      "engage": "Engagement",
       "contact": "Contact"
     },
     "langSwitchLabel": "Language",
     "breadcrumbHome": "Home",
+    "breadcrumbLabel": "Breadcrumb",
     "ogImageAlt": "HDN Technologies logo on a dark blue background with the address hdntechnologies.com",
+    "cta": {
+      "title": "Have a system that needs to work better?",
+      "body": "Send a short email describing what you need. You will get a reply from the engineer who would do the work – not from a sales team.",
+      "button": "Start a conversation"
+    },
     "footer": {
       "legalLabel": "Company details",
+      "siteLabel": "Site",
       "locationLabel": "Location",
       "location": "Plovdiv, Bulgaria",
       "emailLabel": "Email",
@@ -25,67 +33,114 @@
     }
   },
   "home": {
-    "title": "Software Development & System Integration | HDN Technologies",
-    "description": "HDN Technologies is a software engineering company in Plovdiv, Bulgaria. We build custom software, integrate business systems and engineer real-time machine-to-cloud communication for businesses across the EU.",
+    "title": "Software Development & Integration in Bulgaria | HDN Technologies",
+    "description": "Senior software engineering from Plovdiv, Bulgaria: real-time machine-to-cloud systems, .NET backends and APIs, and ERP, CRM and e-commerce integrations.",
     "hero": {
-      "eyebrow": "Software engineering · Plovdiv, Bulgaria",
-      "title": "Software engineering and system integration from Plovdiv, for businesses across the EU.",
-      "lead": "HDN Technologies is a Bulgarian engineering company. We build custom software, connect business systems, and engineer real-time communication between machines and cloud services – including remote-service communication for the automotive industry.",
-      "ctaPrimary": "Email us about your project",
-      "ctaSecondary": "See our work"
+      "eyebrow": "Software engineering · Plovdiv, Bulgaria · EU",
+      "title": "Reliable backends, real-time systems and integrations for Bulgarian and European companies.",
+      "lead": "HDN Technologies is an engineering company from Plovdiv. You work directly with the senior engineer who designs and ships your system – whether that means connecting machines to the cloud in real time or getting your ERP, CRM and e-commerce platforms to agree with each other.",
+      "ctaPrimary": "Start a conversation",
+      "ctaSecondary": "See services and the case study"
     },
     "facts": {
       "label": "Key facts",
       "items": [
         "Registered EU company",
-        "Plovdiv, Bulgaria",
         "VAT BG207848269",
-        "Founder-led delivery"
+        "Eastern European Time (1 h ahead of CET)",
+        "English & Bulgarian",
+        "Senior engineer–led delivery"
       ]
+    },
+    "why": {
+      "title": "Why work with HDN Technologies",
+      "intro": "Four commitments you can hold us to.",
+      "items": [
+        {
+          "title": "Direct senior engineering ownership",
+          "body": "One accountable engineer from architecture to production. No account managers, no sales-to-delivery hand-offs, no lost requirements."
+        },
+        {
+          "title": "Production-grade real-time and integration experience",
+          "body": "We owned the core engineering of a real-time machine-to-cloud communication platform for the automotive industry, and we design integrations between business systems that keep working when one side changes."
+        },
+        {
+          "title": "EU and Bulgarian business alignment",
+          "body": "A Plovdiv-based EU legal entity (VAT BG207848269) on Eastern European Time – one hour ahead of CET – so our working day overlaps with DACH, Nordic, Benelux and Bulgarian teams. Clear communication in English and Bulgarian."
+        },
+        {
+          "title": "Security, privacy and maintainability by default",
+          "body": "GDPR-aware data handling, a minimal attack surface, automated CI/CD and documented handovers. You own the code, the repositories and the intellectual property."
+        }
+      ],
+      "more": "More on how we work and who we are a good fit for"
+    },
+    "triggers": {
+      "title": "When to reach out",
+      "intro": "Companies usually get in touch when one of these sounds familiar.",
+      "items": [
+        {
+          "title": "Legacy, industrial or fleet systems need modern APIs",
+          "body": "Machines, controllers or older on-premise software hold valuable data, but nothing else can talk to them reliably."
+        },
+        {
+          "title": "You need real-time telemetry or event-driven workflows",
+          "body": "Status updates, alerts or remote actions must reach people and services in seconds, not in a nightly batch."
+        },
+        {
+          "title": "ERP, CRM and e-commerce syncs are manual or brittle",
+          "body": "Orders, stock or customer data are copied by hand, or by scripts that fail silently – until a customer notices."
+        },
+        {
+          "title": "A backend needs to be rescued or scaled",
+          "body": "An existing system is slow, fragile or undocumented, and you need an experienced engineer to stabilise it and plan the next step."
+        },
+        {
+          "title": "You are planning a new system",
+          "body": "Before committing a budget, you want an independent review of the architecture, the technology choices and the risks."
+        },
+        {
+          "title": "You want a reliable EU technical partner",
+          "body": "You are looking for a long-term engineering partner inside the EU, with clear contracts, VAT invoicing and working hours that match yours."
+        }
+      ],
+      "cta": "Sounds familiar? Email us"
     },
     "services": {
       "title": "Services",
-      "intro": "We take responsibility for the engineering: from the first architecture decision to a system running in production.",
+      "intro": "Three areas where we take full responsibility for the engineering – from the first architecture decision to a system running in production.",
+      "more": "Problems, deliverables and approach",
+      "all": "All services and capabilities",
       "items": [
         {
-          "id": "consulting",
-          "title": "Consulting",
-          "forWhom": "For teams planning a new system or modernising an existing one.",
-          "body": "Architecture reviews, technology selection and modernisation roadmaps. You get a written assessment of your current landscape and a concrete, prioritised plan your team can act on."
+          "id": "realtime",
+          "title": "Real-time systems & connected devices",
+          "forWhom": "For machines, devices and applications that must exchange data live.",
+          "body": "Bidirectional real-time communication with SignalR and WebSockets, telemetry data flows and event-driven messaging."
+        },
+        {
+          "id": "backend",
+          "title": "Custom backend engineering & APIs",
+          "forWhom": "For products and internal tools that off-the-shelf software cannot cover.",
+          "body": "Reliable .NET backends and web APIs, sound data models and automated CI/CD – built to be maintained."
         },
         {
           "id": "integration",
-          "title": "System Integration",
-          "forWhom": "For companies whose ERP, CRM, e-commerce or industrial systems need to work together.",
-          "body": "We design and build the interfaces and data flows between your systems, so the right data reaches the right place reliably – and the integration keeps working when one side changes."
-        },
-        {
-          "id": "development",
-          "title": "Software Development",
-          "forWhom": "For products and internal tools that off-the-shelf software cannot cover.",
-          "body": "Custom backends, APIs and applications, from concept to a maintained production system – including databases, automated CI/CD pipelines and documentation."
+          "title": "Business system integrations",
+          "forWhom": "For companies whose ERP, CRM and e-commerce systems need to work together.",
+          "body": "Idempotent synchronisation pipelines, webhook orchestration and modernisation of legacy interfaces."
         }
       ]
     },
     "work": {
-      "title": "Selected work",
+      "title": "Featured case",
       "intro": "We share project details only within the limits of our confidentiality agreements.",
       "case": {
         "title": "Real-time teleservice communication platform",
         "meta": "Automotive industry · Two-year engagement, completed in 2026",
         "nda": "Client and product details are confidential under NDA.",
-        "context": "A platform that connects machines in the field with central services in real time, so they can be monitored and serviced remotely. We were responsible for the platform's core engineering, end to end.",
-        "scopeTitle": "Our scope",
-        "scope": [
-          "System design and architecture",
-          "API design and implementation",
-          "Real-time communication between machines and backend services with SignalR",
-          "System data flows",
-          "Database design",
-          "Complete CI/CD pipeline"
-        ],
-        "outcomeTitle": "Outcome",
-        "outcome": "Delivered end to end over a two-year engagement and completed in 2026."
+        "summary": "A platform that connects machines in the field with central services in real time, so they can be monitored and serviced remotely. We owned the core engineering: architecture, APIs, bidirectional SignalR communication, data flows, databases and the complete CI/CD pipeline.",
+        "link": "Read the full case study"
       },
       "diagram": {
         "caption": "Simplified, anonymised view of the architecture. It shows the type of system, not the client's actual topology.",
@@ -101,6 +156,49 @@
           "Deploy"
         ]
       }
+    },
+    "engage": {
+      "title": "How you can engage us",
+      "intro": "Three ways to work together. Most clients start with an audit or a clearly scoped project.",
+      "bestForLabel": "Best for",
+      "timelineLabel": "Typical timeline",
+      "receiveLabel": "You receive",
+      "items": [
+        {
+          "id": "audit",
+          "title": "Architecture & integration audit",
+          "bestFor": "Teams planning a new system, a modernisation or an integration – or trying to understand why an existing one keeps breaking.",
+          "timeline": "1–3 weeks",
+          "receive": [
+            "A written assessment of your current architecture and integrations",
+            "Identified risks, bottlenecks and quick wins",
+            "A prioritised roadmap with effort estimates"
+          ]
+        },
+        {
+          "id": "fixed",
+          "title": "Fixed-scope delivery",
+          "bestFor": "A clearly defined system, integration or API with agreed requirements.",
+          "timeline": "Typically 1–6 months",
+          "receive": [
+            "An agreed scope, plan and price before work starts",
+            "Working increments with regular demos",
+            "Source code, CI/CD pipeline, documentation and handover"
+          ]
+        },
+        {
+          "id": "partner",
+          "title": "Dedicated technical partner (retainer)",
+          "bestFor": "Companies that need ongoing senior engineering capacity without hiring.",
+          "timeline": "Ongoing, billed monthly",
+          "receive": [
+            "Reserved monthly capacity of senior engineering time",
+            "Continuous development, maintenance and support",
+            "Architecture guidance for your team and your roadmap"
+          ]
+        }
+      ],
+      "note": "Not sure which fits? Describe your situation in an email and we will suggest one."
     },
     "process": {
       "title": "How an engagement works",
@@ -128,28 +226,40 @@
       "title": "Frequently asked questions",
       "items": [
         {
-          "q": "Where is HDN Technologies based, and who do you work with?",
-          "a": "HDN Technologies (Ейч Ди Ен Технолоджийс ЕООД) is a software engineering company based in Plovdiv, Bulgaria. We work with businesses in Bulgaria and across the European Union."
-        },
-        {
-          "q": "What does HDN Technologies do?",
-          "a": "We provide consulting, system integration and custom software development: architecture and system design, APIs, data flows, databases, real-time communication and CI/CD pipelines – from the first design decision to a system running in production."
-        },
-        {
-          "q": "Do you have experience with real-time systems?",
-          "a": "Yes. Over a two-year engagement completed in 2026, we engineered a real-time teleservice communication platform for the automotive industry, including real-time communication between machines and backend services with SignalR. Client details are confidential under NDA."
+          "q": "Who owns the code and the intellectual property?",
+          "a": "You do. Source code, repositories, documentation and other deliverables are transferred to you, and the contract says so explicitly. We can also work in repositories and cloud accounts you own from day one."
         },
         {
           "q": "Will you sign an NDA?",
           "a": "Yes. If you need a non-disclosure agreement before sharing details about your systems or product, mention it in your first email and we will sign it before going into detail."
         },
         {
-          "q": "How does a project start?",
-          "a": "Send a short email to sales@hdntechnologies.com describing what you need. We follow up with an introductory call and then a written technical assessment with a proposed architecture, scope and delivery plan."
+          "q": "Which time zone are you in, and how do we communicate?",
+          "a": "We are in Plovdiv, Bulgaria, on Eastern European Time – one hour ahead of Central European Time – so our working day overlaps with teams across the EU. We work in English or Bulgarian, by email and video calls, with regular demos during delivery and a cadence agreed at the start."
         },
         {
-          "q": "Which languages do you work in?",
-          "a": "We work in English and Bulgarian."
+          "q": "How do you price projects, and is there a minimum engagement?",
+          "a": "We do not publish a rate card, because scope drives cost. A fixed-scope project gets a fixed price after the technical assessment, and a retainer is billed monthly for reserved capacity. The smallest engagement is the architecture and integration audit."
+        },
+        {
+          "q": "What is your tech stack?",
+          "a": "Our core stack is C# and .NET for backends and web APIs, SignalR and WebSockets for real-time communication, relational and time-series databases, and automated CI/CD pipelines. For integrations, we work with whatever your ERP, CRM, e-commerce or industrial systems expose – REST or SOAP APIs, webhooks, files or message queues."
+        },
+        {
+          "q": "Do you provide support after launch?",
+          "a": "Yes. Every delivery ends with documentation, deployment pipelines and knowledge transfer. After that, you can keep us on a support or development retainer, or run the system with your own team."
+        },
+        {
+          "q": "Where is HDN Technologies based, and who do you work with?",
+          "a": "HDN Technologies (Ейч Ди Ен Технолоджийс ЕООД) is a software engineering company based in Plovdiv, Bulgaria. We work with businesses in Bulgaria and across the European Union."
+        },
+        {
+          "q": "Do you have experience with real-time systems?",
+          "a": "Yes. Over a two-year engagement completed in 2026, we engineered a real-time teleservice communication platform for the automotive industry, including bidirectional real-time communication between machines and backend services with SignalR. Client details are confidential under NDA."
+        },
+        {
+          "q": "How does a project start?",
+          "a": "Send a short email to sales@hdntechnologies.com describing what you need. We follow up with an introductory call and then a written technical assessment with a proposed architecture, scope and delivery plan."
         }
       ]
     },
@@ -171,8 +281,296 @@
       "privacyLink": "privacy notice"
     }
   },
+  "whyUs": {
+    "title": "Why HDN Technologies: Standards, Ownership & Fit",
+    "description": "How HDN Technologies works: direct senior ownership, tested and documented delivery, your IP, a GDPR-aware EU partner – and who we are a good fit for.",
+    "eyebrow": "Why us",
+    "heading": "Why HDN Technologies",
+    "lead": "HDN Technologies is a senior-led software engineering company in Plovdiv, Bulgaria. Many companies can write code. When you hire an engineering partner, what matters is knowing who is responsible, what you will receive, and whether the system will stay maintainable after handover. This is how we answer those questions.",
+    "standards": {
+      "title": "How we work",
+      "intro": "The standards we apply to every engagement, whatever its size.",
+      "items": [
+        {
+          "title": "Communication cadence",
+          "body": "One technical point of contact – the engineer doing the work. We agree the cadence at the start, for example a short weekly status update and a demo at the end of each increment, with direct answers by email in between."
+        },
+        {
+          "title": "Code and IP ownership",
+          "body": "You own the source code, repositories and deliverables. We can work in your Git organisation and cloud accounts from day one, so nothing is ever held back."
+        },
+        {
+          "title": "Documentation and handover",
+          "body": "Architecture overviews, records of important design decisions, API documentation and runbooks are part of the deliverable – not an optional extra at the end."
+        },
+        {
+          "title": "Testing and CI/CD discipline",
+          "body": "Automated builds, tests and deployments from the first weeks of a project. Every change goes through the same pipeline, so releases are routine rather than risky."
+        },
+        {
+          "title": "Security and a minimal attack surface",
+          "body": "Least-privilege access, secrets kept out of source code, pinned dependencies and no unnecessary moving parts. Our access is removed when an engagement ends."
+        },
+        {
+          "title": "Data protection and GDPR",
+          "body": "We are a Bulgarian company within the EU legal framework. We design data flows with data minimisation in mind and can sign a data processing agreement whenever we handle personal data on your behalf."
+        }
+      ]
+    },
+    "example": {
+      "title": "This website follows the same rules",
+      "body": "It ships no JavaScript, loads nothing from third parties, sets no cookies, and passes automated accessibility, performance and security checks before every deployment. It is a small example of the standards we apply to client systems."
+    },
+    "compare": {
+      "title": "How we compare",
+      "intro": "An honest comparison with the two most common alternatives. Each has its place – these are the differences.",
+      "caption": "HDN Technologies compared with traditional outsourcing body-shops and independent freelancers",
+      "criterion": "Criterion",
+      "columns": [
+        "HDN Technologies",
+        "Traditional outsourcing body-shop",
+        "Independent freelancers"
+      ],
+      "rows": [
+        {
+          "label": "Who you talk to",
+          "values": [
+            "The senior engineer who designs and builds the system",
+            "An account or project manager who relays to a team",
+            "The individual developer"
+          ]
+        },
+        {
+          "label": "Who does the work",
+          "values": [
+            "The same senior engineer you spoke to",
+            "Whoever is available; the team may change mid-project",
+            "One person, often split across several clients"
+          ]
+        },
+        {
+          "label": "Architecture ownership",
+          "values": [
+            "End to end, from design to production",
+            "Often split between roles, or left to you",
+            "Usually limited to the assigned task"
+          ]
+        },
+        {
+          "label": "Documentation and handover",
+          "values": [
+            "Part of every deliverable",
+            "Varies; often an extra",
+            "Rarely formalised"
+          ]
+        },
+        {
+          "label": "Contracts, invoicing and IP",
+          "values": [
+            "EU company, VAT invoicing, IP transferred to you",
+            "Formal, but with layers of contracts and overhead",
+            "Varies by individual and jurisdiction"
+          ]
+        },
+        {
+          "label": "If a key person is unavailable",
+          "values": [
+            "Risk reduced by documentation, CI/CD and your ownership of every repository",
+            "Staff can be replaced, though knowledge often leaves with them",
+            "High dependency on one person"
+          ]
+        },
+        {
+          "label": "Best for",
+          "values": [
+            "Systems where quality and accountability matter more than headcount",
+            "Large teams and staff augmentation at scale",
+            "Small, well-defined tasks"
+          ]
+        }
+      ]
+    },
+    "fit": {
+      "title": "Good fit – and not a fit",
+      "intro": "We would rather tell you early than waste your time.",
+      "goodTitle": "A good fit if you…",
+      "good": [
+        "need a business-critical system that must run reliably in production",
+        "value direct communication with the engineer over layers of management",
+        "want clear scope, documentation and ownership of everything we build",
+        "work in Bulgaria or elsewhere in the EU, or keep European working hours",
+        "need real-time communication, backend engineering or system integration"
+      ],
+      "notTitle": "Probably not a fit if you…",
+      "not": [
+        "need a large team of developers within a few weeks",
+        "are looking for the lowest hourly rate above everything else",
+        "mainly need visual design, branding or a marketing website",
+        "want to start building without any written scope or agreed priorities"
+      ]
+    }
+  },
+  "services": {
+    "title": "SignalR, .NET API & ERP Integration Services | HDN Technologies",
+    "description": "Real-time systems with SignalR, custom .NET backends and APIs, and ERP, CRM and e-commerce integrations: problems solved, deliverables and typical durations.",
+    "eyebrow": "Services",
+    "heading": "Services & capabilities",
+    "lead": "HDN Technologies, a software engineering company in Plovdiv, Bulgaria, works in three areas – real-time systems, custom backends and APIs, and business system integrations – from the architecture to a documented system running in production.",
+    "tocLabel": "On this page",
+    "labels": {
+      "problems": "Problems it solves",
+      "deliverables": "Deliverables",
+      "practices": "Architecture & quality practices",
+      "duration": "Typical engagement duration"
+    },
+    "items": [
+      {
+        "id": "realtime",
+        "title": "Real-time systems & connected devices",
+        "summary": "Live, bidirectional communication between machines, devices, backend services and the people who operate them – including telemetry, event-driven messaging and resilient connection state.",
+        "problems": [
+          "Machines or devices in the field that must be monitored, diagnosed or serviced remotely",
+          "Status data that arrives too late to act on",
+          "Polling-based integrations that waste resources and still miss events",
+          "Connections that drop silently and leave systems in an unknown state"
+        ],
+        "deliverables": [
+          "A real-time communication layer built on SignalR or WebSockets",
+          "Telemetry data flows and event-driven messaging",
+          "Connection and device state tracking with diagnostics",
+          "APIs for dashboards, operator tools and other services",
+          "Documentation and a CI/CD pipeline"
+        ],
+        "practices": [
+          "Explicit, versioned message contracts between devices and services",
+          "Clearly defined behaviour on connection loss and reconnection",
+          "Real-time transport kept separate from business logic",
+          "Structured logging and diagnostics for connected clients",
+          "Design that accounts for many concurrent connections"
+        ],
+        "duration": "Typically 3–9 months for a new platform; a few weeks for an assessment or a focused extension of an existing one."
+      },
+      {
+        "id": "backend",
+        "title": "Custom backend engineering & APIs",
+        "summary": "High-reliability .NET backends and web APIs for products and internal tools that off-the-shelf software cannot cover, with sound data models and automated CI/CD.",
+        "problems": [
+          "A product or internal process that no standard software supports",
+          "An existing backend that is slow, fragile or undocumented",
+          "APIs that partners or front-end teams find hard to use",
+          "Releases that are manual, risky and rare"
+        ],
+        "deliverables": [
+          "Backend services and web APIs in .NET",
+          "Relational and time-series data models, with migrations",
+          "API documentation for internal and external consumers",
+          "An automated build, test and deployment pipeline",
+          "Architecture documentation and runbooks"
+        ],
+        "practices": [
+          "Consistent API design with versioning and predictable error handling",
+          "Automated tests where they add the most confidence",
+          "Database schemas designed for the queries the system actually runs",
+          "Infrastructure and configuration kept in version control",
+          "Least-privilege access and secrets kept out of source code"
+        ],
+        "duration": "Typically 2–6 months for a new backend or API; ongoing through a retainer for further development and support."
+      },
+      {
+        "id": "integration",
+        "title": "Business system integrations (ERP, CRM, e-commerce)",
+        "summary": "Reliable data flows between the systems your business depends on – idempotent synchronisation, webhook orchestration and modernisation of legacy interfaces – so the right data reaches the right place once, and on time.",
+        "problems": [
+          "Orders, stock, prices or customer data copied by hand between systems",
+          "Scripts or plugins that fail silently and create duplicates",
+          "Replacing an ERP, CRM or shop would break existing interfaces",
+          "Nobody can say where a record came from, or why it is wrong"
+        ],
+        "deliverables": [
+          "Integration architecture and data mapping between systems",
+          "Idempotent synchronisation pipelines and webhook orchestration",
+          "Error handling, retries and alerts for failed messages",
+          "Modernised or wrapped interfaces for legacy systems",
+          "Operational documentation for your team"
+        ],
+        "practices": [
+          "Idempotent processing, so retries never create duplicates",
+          "One documented source of truth for each type of data",
+          "Failed messages are kept and reprocessed, never silently dropped",
+          "Contract tests against each connected system's API",
+          "Audit trails that show what was synchronised, when and why"
+        ],
+        "duration": "Typically 1–4 months, depending on the number of systems and data flows; a single integration can often be scoped as a fixed project of a few weeks."
+      }
+    ],
+    "engageLink": "See the ways you can engage us",
+    "caseLink": "Read the real-time teleservice case study"
+  },
+  "caseTeleservice": {
+    "title": "Case Study: Real-Time Teleservice Platform | HDN Technologies",
+    "description": "NDA-safe case study: how HDN Technologies engineered a real-time, bidirectional machine-to-cloud teleservice communication platform for the automotive industry.",
+    "eyebrow": "Case study · Automotive",
+    "heading": "Real-time teleservice communication platform",
+    "lead": "Real-time, bidirectional communication between machines in the field and central services – with HDN Technologies responsible for the core engineering.",
+    "overviewTitle": "Overview",
+    "overview": "A platform that connects machines in the field with central services in real time, so they can be monitored and serviced remotely. HDN Technologies was responsible for the platform's core engineering.",
+    "challengeTitle": "The engineering challenge",
+    "challenge": [
+      "Machines in the field and central services had to exchange data in both directions, in real time – telemetry flowing in, remote-service interactions flowing back.",
+      "Communication had to stay reliable across many connected machines, with well-defined behaviour when a connection is interrupted.",
+      "The data had to flow cleanly into APIs, services and databases that other parts of the business could rely on."
+    ],
+    "architectureTitle": "Architecture at a glance",
+    "approachTitle": "How it was engineered",
+    "approach": [
+      {
+        "title": "Bidirectional real-time communication",
+        "body": "A SignalR-based real-time hub connects machines with backend services over persistent connections, carrying telemetry in one direction and remote-service interactions in the other."
+      },
+      {
+        "title": "APIs and service integration",
+        "body": "Well-defined APIs expose the real-time layer to other services and applications, keeping transport concerns separate from business logic."
+      },
+      {
+        "title": "Telemetry and data flows",
+        "body": "Data flows were designed as a whole – from the machine, through the real-time hub and services, into storage – so every piece of data has a clear path."
+      },
+      {
+        "title": "Reliability",
+        "body": "The system was designed for continuous operation, with attention to the connection lifecycle, error handling and diagnostics."
+      },
+      {
+        "title": "Database architecture",
+        "body": "The database design covers both operational data and the data produced by connected machines, structured for the way the platform reads and writes it."
+      },
+      {
+        "title": "Complete CI/CD pipeline",
+        "body": "Automated build, test and deployment pipelines make releases of the platform's components repeatable."
+      }
+    ],
+    "scopeTitle": "Our scope",
+    "scope": [
+      "System design and architecture",
+      "API design and implementation",
+      "Real-time communication between machines and backend services with SignalR",
+      "System data flows",
+      "Database design",
+      "Complete CI/CD pipeline"
+    ],
+    "outcomeTitle": "Outcome",
+    "outcome": "Delivered over a two-year engagement and completed in 2026.",
+    "relevanceTitle": "Where this experience applies",
+    "relevance": [
+      "Remote monitoring and servicing of machines, vehicles or equipment",
+      "Industrial and IoT telemetry flowing into business systems",
+      "Live dashboards and operator tools fed by real-time data",
+      "Any system where many clients need a reliable, persistent connection to a backend"
+    ],
+    "discussNote": "We are happy to go deeper into the engineering approach in a call, within the limits of our confidentiality obligations.",
+    "servicesLink": "See our real-time systems service"
+  },
   "privacy": {
-    "title": "Privacy notice – HDN Technologies",
+    "title": "Privacy notice | HDN Technologies",
     "description": "How HDN Technologies processes personal data when you visit this website or contact us by email.",
     "heading": "Privacy notice",
     "updatedLabel": "Last updated",

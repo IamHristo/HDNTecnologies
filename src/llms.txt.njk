@@ -19,25 +19,46 @@ eleventyExcludeFromCollections: true
 - Working languages: English, Bulgarian
 - Email: {{ site.email }}
 - LinkedIn: {{ site.linkedin }}
+- Core stack: C#/.NET, SignalR/WebSockets, relational and time-series databases, CI/CD
+- Bulgarian version: {{ site.url }}/bg/
 
 ## Pages
 
-{% for alt in "home" | alternates %}
-- [{{ "home.title" | t(alt.code) | safe }}]({{ site.url }}{{ alt.url }}) ({{ alt.endonym }}): services, selected work, engagement process, FAQ and contact
+{% set pageNotes = {
+  home: "overview, differentiators, when to reach out, engagement models, FAQ and contact",
+  whyUs: "engineering standards, comparison with body-shops and freelancers, good fit / not a fit",
+  services: "real-time systems, backend engineering and APIs, business system integrations",
+  caseTeleservice: "NDA-safe case study of a real-time teleservice communication platform",
+  privacy: "data controller details and GDPR information"
+} %}
+{% for pageKey, path in pages %}
+{% for alt in pageKey | alternates %}
+- [{{ (pageKey + (".heading" if pageKey != "home" else ".title")) | t(alt.code) | safe }}]({{ site.url }}{{ alt.url }}) ({{ alt.endonym }}): {{ pageNotes[pageKey] }}
 {% endfor %}
-{% for alt in "privacy" | alternates %}
-- [{{ "privacy.heading" | t(alt.code) | safe }}]({{ site.url }}{{ alt.url }}) ({{ alt.endonym }}): data controller details and GDPR information
+{% endfor %}
+
+## Why work with us
+
+{% for w in en.why.items %}
+- {{ w.title | safe }}: {{ w.body | safe }}
 {% endfor %}
 
 ## Services
 
-{% for s in en.services.items %}
-- {{ s.title | safe }}: {{ s.forWhom | safe }} {{ s.body | safe }}
+{% for s in "services.items" | t("en") %}
+- {{ s.title | safe }}: {{ s.summary | safe }} Duration: {{ s.duration | safe }}
+{% endfor %}
+
+## Engagement models
+
+{% for m in en.engage.items %}
+- {{ m.title | safe }} ({{ m.timeline | safe }}): {{ m.bestFor | safe }} You receive: {{ m.receive | join("; ") | safe }}.
 {% endfor %}
 
 ## Selected work
 
-- {{ en.work.case.title | safe }} ({{ en.work.case.meta | safe }}). {{ en.work.case.context | safe }} Scope: {{ en.work.case.scope | join("; ") | safe }}. {{ en.work.case.nda | safe }}
+{% set cs = "caseTeleservice" | t("en") %}
+- {{ cs.heading | safe }} ({{ en.work.case.meta | safe }}). {{ cs.overview | safe }} Scope: {{ cs.scope | join("; ") | safe }}. {{ en.work.case.nda | safe }}
 
 ## FAQ
 

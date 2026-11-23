@@ -1,0 +1,84 @@
+---
+layout: layouts/base.njk
+pageKey: caseTeleservice
+indexable: true
+pagination:
+  data: locales
+  size: 1
+  alias: locale
+permalink: "{{ locale.prefix }}/work/teleservice/index.html"
+---
+{# NDA-safe by design: only the class of system and HDN's engineering scope. Never add client names,
+   product names, figures or topology details here without the client's written approval. #}
+{% set p = "caseTeleservice" | t(locale.code) %}
+{% set h = "home" | t(locale.code) %}
+{% set ph = p %}
+{% include "partials/page-head.njk" %}
+
+<div class="section">
+  <div class="container case-page">
+    <div class="case-page__meta">
+      <p class="case__meta">{{ h.work.case.meta }}</p>
+      <p class="case__nda">
+        <svg class="icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path class="ic" d="M6 11h12v10H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3"/></svg>
+        {{ h.work.case.nda }}
+      </p>
+    </div>
+
+    <div class="case-page__cols case-page__cols--even">
+    <section class="prose" aria-labelledby="overview-title">
+      <h2 id="overview-title">{{ p.overviewTitle }}</h2>
+      <p>{{ p.overview }}</p>
+    </section>
+
+    <section class="prose" aria-labelledby="challenge-title">
+      <h2 id="challenge-title">{{ p.challengeTitle }}</h2>
+      <ul class="bullets">
+        {% for x in p.challenge %}<li>{{ x }}</li>{% endfor %}
+      </ul>
+    </section>
+    </div>
+
+    <section aria-labelledby="architecture-title">
+      <h2 id="architecture-title" class="section__title">{{ p.architectureTitle }}</h2>
+      {% include "diagrams/architecture.njk" %}
+    </section>
+
+    <section aria-labelledby="approach-title">
+      <h2 id="approach-title" class="section__title">{{ p.approachTitle }}</h2>
+      <ul class="feature-grid feature-grid--3">
+        {% for item in p.approach %}
+        <li class="feature">
+          <h3 class="feature__title">{{ item.title }}</h3>
+          <p>{{ item.body }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <div class="case-page__cols">
+      <section aria-labelledby="scope-title">
+        <h2 id="scope-title" class="section__title">{{ p.scopeTitle }}</h2>
+        <ul class="checklist">
+          {% for x in p.scope %}<li>{{ x }}</li>{% endfor %}
+        </ul>
+      </section>
+      <section aria-labelledby="outcome-title">
+        <h2 id="outcome-title" class="section__title">{{ p.outcomeTitle }}</h2>
+        <p>{{ p.outcome }}</p>
+      </section>
+    </div>
+
+    <section aria-labelledby="relevance-title">
+      <h2 id="relevance-title" class="section__title">{{ p.relevanceTitle }}</h2>
+      <ul class="bullets">
+        {% for x in p.relevance %}<li>{{ x }}</li>{% endfor %}
+      </ul>
+      <p class="case-page__note">{{ p.discussNote }}</p>
+      <p class="section__more"><a href="{{ 'services' | localeUrl(locale.code) }}#service-realtime">{{ p.servicesLink }}</a></p>
+    </section>
+  </div>
+</div>
+
+{% set ctaRef = "case-teleservice" %}
+{% include "partials/cta.njk" %}

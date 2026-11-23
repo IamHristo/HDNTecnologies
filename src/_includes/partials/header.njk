@@ -1,4 +1,5 @@
 {% set homeUrl = "home" | localeUrl(locale.code) %}
+{% set nav = "common.nav" | t(locale.code) %}
 <header class="site-header">
   <div class="container site-header__inner">
     <a class="brand" href="{{ homeUrl }}"{% if pageKey == "home" %} aria-current="page"{% endif %}>
@@ -7,10 +8,11 @@
     </a>
     <nav class="site-nav" aria-label="{{ 'common.navLabel' | t(locale.code) }}">
       <ul class="site-nav__list">
-        <li><a href="{{ homeUrl }}#services">{{ "common.nav.services" | t(locale.code) }}</a></li>
-        <li><a href="{{ homeUrl }}#work">{{ "common.nav.work" | t(locale.code) }}</a></li>
-        <li><a href="{{ homeUrl }}#process">{{ "common.nav.process" | t(locale.code) }}</a></li>
-        <li><a href="{{ homeUrl }}#contact">{{ "common.nav.contact" | t(locale.code) }}</a></li>
+        {% for key in ["whyUs", "services", "caseTeleservice"] %}
+        <li><a href="{{ key | localeUrl(locale.code) }}"{% if pageKey == key %} aria-current="page"{% endif %}>{{ nav[key] }}</a></li>
+        {% endfor %}
+        <li><a href="{{ homeUrl }}#engage">{{ nav.engage }}</a></li>
+        <li><a href="{{ homeUrl }}#contact">{{ nav.contact }}</a></li>
       </ul>
     </nav>
     {% include "partials/lang-switch.njk" %}

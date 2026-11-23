@@ -18,7 +18,7 @@ permalink: "{{ locale.prefix }}/index.html"
     <p class="hero__lead">{{ h.hero.lead }}</p>
     <div class="cluster">
       <a class="btn btn--primary" href="{{ 'hero' | mailto(locale.code) }}">{{ h.hero.ctaPrimary }}</a>
-      <a class="btn btn--ghost" href="#work">{{ h.hero.ctaSecondary }}</a>
+      <a class="btn btn--ghost" href="#services">{{ h.hero.ctaSecondary }}</a>
     </div>
     <ul class="facts" aria-label="{{ h.facts.label }}">
       {% for fact in h.facts.items %}
@@ -27,6 +27,38 @@ permalink: "{{ locale.prefix }}/index.html"
     </ul>
   </div>
   {% include "diagrams/hero.svg.njk" %}
+  </div>
+</section>
+
+<section id="why" class="section" aria-labelledby="why-title">
+  <div class="container">
+    <h2 id="why-title" class="section__title">{{ h.why.title }}</h2>
+    <p class="section__intro">{{ h.why.intro }}</p>
+    <ol class="feature-grid">
+      {% for item in h.why.items %}
+      <li class="feature">
+        <h3 class="feature__title">{{ item.title }}</h3>
+        <p>{{ item.body }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+    <p class="section__more"><a href="{{ 'whyUs' | localeUrl(locale.code) }}">{{ h.why.more }}</a></p>
+  </div>
+</section>
+
+<section id="when" class="section section--alt" aria-labelledby="when-title">
+  <div class="container">
+    <h2 id="when-title" class="section__title">{{ h.triggers.title }}</h2>
+    <p class="section__intro">{{ h.triggers.intro }}</p>
+    <ul class="trigger-grid">
+      {% for item in h.triggers.items %}
+      <li class="trigger">
+        <h3 class="trigger__title">{{ item.title }}</h3>
+        <p>{{ item.body }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="section__more"><a class="btn btn--primary" href="{{ 'triggers' | mailto(locale.code) }}">{{ h.triggers.cta }}</a></p>
   </div>
 </section>
 
@@ -41,9 +73,11 @@ permalink: "{{ locale.prefix }}/index.html"
         <h3 class="card__title">{{ service.title }}</h3>
         <p class="card__for">{{ service.forWhom }}</p>
         <p>{{ service.body }}</p>
+        <p class="card__link"><a href="{{ 'services' | localeUrl(locale.code) }}#service-{{ service.id }}">{{ h.services.more }}<span class="visually-hidden">: {{ service.title }}</span></a></p>
       </li>
       {% endfor %}
     </ul>
+    <p class="section__more"><a href="{{ 'services' | localeUrl(locale.code) }}">{{ h.services.all }}</a></p>
   </div>
 </section>
 
@@ -62,28 +96,40 @@ permalink: "{{ locale.prefix }}/index.html"
         </p>
       </header>
       <div class="case__body">
-        <div class="case__text">
-          <div class="case__context">
-            <p>{{ c.context }}</p>
-            <h4 class="case__subtitle">{{ c.outcomeTitle }}</h4>
-            <p>{{ c.outcome }}</p>
-          </div>
-          <div>
-            <h4 class="case__subtitle">{{ c.scopeTitle }}</h4>
-            <ul class="checklist">
-              {% for item in c.scope %}
-              <li>{{ item }}</li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
+        <p class="case__summary">{{ c.summary }}</p>
         {% include "diagrams/architecture.njk" %}
+        <p><a class="btn btn--ghost" href="{{ 'caseTeleservice' | localeUrl(locale.code) }}">{{ c.link }}</a></p>
       </div>
     </article>
   </div>
 </section>
 
-<section id="process" class="section" aria-labelledby="process-title">
+<section id="engage" class="section" aria-labelledby="engage-title">
+  <div class="container">
+    <h2 id="engage-title" class="section__title">{{ h.engage.title }}</h2>
+    <p class="section__intro">{{ h.engage.intro }}</p>
+    <ul class="engage-grid">
+      {% for m in h.engage.items %}
+      <li class="engage" id="engage-{{ m.id }}">
+        <h3 class="engage__title">{{ m.title }}</h3>
+        <dl class="engage__facts">
+          <div><dt>{{ h.engage.bestForLabel }}</dt><dd>{{ m.bestFor }}</dd></div>
+          <div><dt>{{ h.engage.timelineLabel }}</dt><dd>{{ m.timeline }}</dd></div>
+        </dl>
+        <h4 class="engage__subtitle">{{ h.engage.receiveLabel }}</h4>
+        <ul class="checklist">
+          {% for r in m.receive %}
+          <li>{{ r }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="section__more">{{ h.engage.note }}</p>
+  </div>
+</section>
+
+<section id="process" class="section section--alt" aria-labelledby="process-title">
   <div class="container">
     <h2 id="process-title" class="section__title">{{ h.process.title }}</h2>
     <p class="section__intro">{{ h.process.intro }}</p>
@@ -98,7 +144,7 @@ permalink: "{{ locale.prefix }}/index.html"
   </div>
 </section>
 
-<section id="faq" class="section section--alt" aria-labelledby="faq-title">
+<section id="faq" class="section" aria-labelledby="faq-title">
   <div class="container">
     <h2 id="faq-title" class="section__title">{{ h.faq.title }}</h2>
     {# Visible text is the exact source of the FAQPage JSON-LD (see structuredData in eleventy.config.js). #}
@@ -113,7 +159,7 @@ permalink: "{{ locale.prefix }}/index.html"
   </div>
 </section>
 
-<section id="contact" class="section" aria-labelledby="contact-title">
+<section id="contact" class="section section--alt" aria-labelledby="contact-title">
   <div class="container contact">
     <div class="contact__main">
       <h2 id="contact-title" class="section__title">{{ h.contact.title }}</h2>

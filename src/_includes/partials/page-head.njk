@@ -1,0 +1,15 @@
+{# Header for subpages: visible breadcrumb (mirrors the BreadcrumbList JSON-LD), eyebrow, h1 and lead.
+   Expects `ph` = { eyebrow?, heading, lead } from the page's translation strings. #}
+<section class="page-head" aria-labelledby="page-title">
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="{{ 'common.breadcrumbLabel' | t(locale.code) }}">
+      <ol>
+        <li><a href="{{ 'home' | localeUrl(locale.code) }}">{{ "common.breadcrumbHome" | t(locale.code) }}</a></li>
+        <li><a href="{{ pageKey | localeUrl(locale.code) }}" aria-current="page">{{ ph.heading }}</a></li>
+      </ol>
+    </nav>
+    {% if ph.eyebrow %}<p class="page-head__eyebrow">{{ ph.eyebrow }}</p>{% endif %}
+    <h1 id="page-title" class="page-head__title">{{ ph.heading }}</h1>
+    <p class="page-head__lead">{{ ph.lead }}</p>
+  </div>
+</section>
